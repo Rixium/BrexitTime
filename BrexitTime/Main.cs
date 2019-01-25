@@ -8,23 +8,24 @@ namespace BrexitTime
     {
         public readonly GraphicsDeviceManager Graphics;
         private SpriteBatch _spriteBatch;
+        private readonly ContentChest _contentChest;
 
         public Main()
         {
             Graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            _contentChest = new ContentChest(Content); // We load all our resources in the content chest, so we can easily access them.
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _contentChest.Load(); // Load all the required resources here.
         }
 
         protected override void UnloadContent()
