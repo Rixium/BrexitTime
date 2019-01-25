@@ -46,6 +46,7 @@
     <Compile Include="ContentChest.cs" />
     <Compile Include="Enums\Alignment.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\ScreenManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

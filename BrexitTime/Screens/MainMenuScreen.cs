@@ -9,6 +9,8 @@ namespace BrexitTime.Screens
 {
     public class MainMenuScreen : Screen
     {
+        private const int Padding = 10;
+
         private readonly List<UIElement> _uiElements;
 
         public MainMenuScreen()
@@ -22,7 +24,26 @@ namespace BrexitTime.Screens
             var position =
                 new Vector2(ScreenSettings.ScreenCenter.X,
                     ScreenSettings.ScreenCenter.Y); // Button position center of screen.
-            _uiElements.Add(new Button(ContentChest.ButtonBackground, position, 2, Alignment.CENTER));
+            var startButton = new Button(ContentChest.ButtonBackground, ContentChest.MainFont, "Start", position, 2,
+                Alignment.CENTER);
+            var quitButton = new Button(ContentChest.ButtonBackground, ContentChest.MainFont, "Exit",
+                new Vector2(position.X, startButton.Bottom.Y + Padding), 2,
+                Alignment.CENTER);
+
+            _uiElements.Add(startButton);
+            _uiElements.Add(quitButton);
+
+            // Register all of the UI elements so that our input manager knows if they've been clicked.
+            InputManager.RegisterUIElement(OnStartClicked, startButton);
+            InputManager.RegisterUIElement(OnQuitClicked, quitButton);
+        }
+
+        private void OnQuitClicked()
+        {
+        }
+
+        private void OnStartClicked()
+        {
         }
 
         public override void Update(float deltaTime)
@@ -32,7 +53,7 @@ namespace BrexitTime.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearClamp);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
             foreach (var elem in _uiElements)
                 elem.Draw(spriteBatch);
 
