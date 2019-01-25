@@ -13,6 +13,7 @@ namespace BrexitTime
 
         public void Load()
         {
+            // Load all assets in here.
         }
     }
 }
