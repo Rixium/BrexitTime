@@ -39,6 +39,7 @@ namespace BrexitTime
 
         protected override void Initialize()
         {
+            Window.Title = "Brexit Time - The Ultimate Brexit Showdown Simulator 2019";
             _screenManager = new ScreenManager(this, _contentChest); // Hold the state of the screens.
             ScreenSettings.Initialise(Graphics); // We can store some constants here that we can use throughout.
             base.Initialize();
@@ -50,7 +51,7 @@ namespace BrexitTime
             _contentChest.Load(); // Load all the required resources here.            
 
 
-            _screenManager.AddScreen(new MainMenuScreen());
+            _screenManager.AddScreen(new SplashScreen());
         }
 
         protected override void UnloadContent()

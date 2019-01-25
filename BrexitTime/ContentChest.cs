@@ -16,12 +16,14 @@ namespace BrexitTime
         public Texture2D Cursor { get; set; }
         public Texture2D Pixel { get; set; }
         public SpriteFont MainFont { get; set; }
+        public Texture2D Splash { get; set; }
 
         public void Load()
         {
             // Load all assets in here.
             ButtonBackground = Load<Texture2D>("UI/button");
             Cursor = Load<Texture2D>("cursor");
+            Splash = Load<Texture2D>("splash");
             Pixel = Load<Texture2D>("pixel");
             MainFont = Load<SpriteFont>("Fonts/MainFont");
         }
