@@ -18,6 +18,7 @@ namespace BrexitTime.Managers
 
         public void AddScreen(IScreen screen)
         {
+            // Set the screen reference of the content chest.
             screen.ContentChest = _contentChest;
             _screens.Add(screen);
         }
