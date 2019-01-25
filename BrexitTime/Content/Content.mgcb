@@ -140,6 +140,12 @@
 /processorParam:TextureFormat=Color
 /build:Foreground/desk.png
 
+#begin music/mainsong.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/mainsong.mp3
+
 #begin pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor

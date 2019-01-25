@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace BrexitTime
 {
@@ -12,6 +13,7 @@ namespace BrexitTime
             _contentManager = contentManager;
         }
 
+        public Song MainSong { get; set; }
         public Texture2D ButtonBackground { get; set; }
         public Texture2D Cursor { get; set; }
         public Texture2D Pixel { get; set; }
@@ -28,6 +30,7 @@ namespace BrexitTime
             Pixel = Load<Texture2D>("pixel");
             MainFont = Load<SpriteFont>("Fonts/MainFont");
             GameBackground = Load<Texture2D>("Background/background");
+            MainSong = Load<Song>("music/mainsong");
 
         }
 

@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using BrexitTime.Constants;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BrexitTime.Screens
 {
@@ -17,7 +19,8 @@ namespace BrexitTime.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-
+            spriteBatch.Draw(ContentChest.GameBackground,
+                new Rectangle(0, 0, ScreenSettings.Width, ScreenSettings.Height), Color.White);
             spriteBatch.End();
             base.Draw(spriteBatch);
         }
