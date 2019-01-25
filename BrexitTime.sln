@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.329
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrexitTime", "BrexitTime\BrexitTime.csproj", "{815F99A9-4291-4BA1-8690-C04E9CF9231A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{815F99A9-4291-4BA1-8690-C04E9CF9231A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815F99A9-4291-4BA1-8690-C04E9CF9231A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815F99A9-4291-4BA1-8690-C04E9CF9231A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815F99A9-4291-4BA1-8690-C04E9CF9231A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DBD123C-7E3B-4A99-9DBE-AE439E25EE53}
+	EndGlobalSection
+EndGlobal
