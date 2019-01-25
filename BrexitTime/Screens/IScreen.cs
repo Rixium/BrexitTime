@@ -13,5 +13,7 @@ namespace BrexitTime.Screens
         void Draw(SpriteBatch spriteBatch);
         void SetState(ScreenState transitionOn);
         void AddOnQuitListener(Action onQuit);
+        void AddOnScreenChangeListener(Action<IScreen> nextScreen);
+        ScreenState GetState();
     }
 }

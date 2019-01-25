@@ -45,6 +45,7 @@ namespace BrexitTime.Screens
 
         private void OnStartClicked()
         {
+            ChangeScreen(new CharacterSelectScreen());
         }
 
         public override void Update(float deltaTime)

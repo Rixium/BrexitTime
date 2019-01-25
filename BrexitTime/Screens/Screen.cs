@@ -10,6 +10,7 @@ namespace BrexitTime.Screens
     public class Screen : IScreen
     {
         protected readonly InputManager InputManager;
+        private Action<IScreen> _changeScreen;
         private float _fadeAlpha = 1.0f;
         private Action _onQuit;
 
@@ -65,6 +66,16 @@ namespace BrexitTime.Screens
             _onQuit += onQuit;
         }
 
+        public ScreenState GetState()
+        {
+            return ScreenState;
+        }
+
+        public void AddOnScreenChangeListener(Action<IScreen> action)
+        {
+            _changeScreen += action;
+        }
+
         private void FadeOut(float deltaTime)
         {
             _fadeAlpha += FadeSpeed;
@@ -80,6 +91,12 @@ namespace BrexitTime.Screens
         protected virtual void Quit()
         {
             _onQuit?.Invoke();
+        }
+
+        protected virtual void ChangeScreen(IScreen screen)
+        {
+            SetState(ScreenState.TransitionOff);
+            _changeScreen?.Invoke(screen);
         }
     }
 }
