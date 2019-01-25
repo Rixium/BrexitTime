@@ -40,6 +40,7 @@ namespace BrexitTime.Screens
 
         private void OnQuitClicked()
         {
+            Quit();
         }
 
         private void OnStartClicked()
@@ -48,6 +49,10 @@ namespace BrexitTime.Screens
 
         public override void Update(float deltaTime)
         {
+            if (ScreenState == ScreenState.Active)
+            {
+            }
+
             base.Update(deltaTime);
         }
 
@@ -58,6 +63,8 @@ namespace BrexitTime.Screens
                 elem.Draw(spriteBatch);
 
             spriteBatch.End();
+
+            base.Draw(spriteBatch); // Required for transitions.
         }
     }
 }

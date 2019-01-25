@@ -1,4 +1,8 @@
-﻿using BrexitTime.Managers;
+﻿using System;
+using BrexitTime.Constants;
+using BrexitTime.Enums;
+using BrexitTime.Managers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BrexitTime.Screens
@@ -6,11 +10,17 @@ namespace BrexitTime.Screens
     public class Screen : IScreen
     {
         protected readonly InputManager InputManager;
+        private float _fadeAlpha = 1.0f;
+        private Action _onQuit;
 
         public Screen()
         {
             InputManager = new InputManager();
         }
+
+        protected ScreenState ScreenState { get; set; }
+
+        public float FadeSpeed { get; set; } = 0.01f;
 
         public ContentChest ContentChest { get; set; }
 
@@ -20,11 +30,56 @@ namespace BrexitTime.Screens
 
         public virtual void Update(float deltaTime)
         {
-            InputManager.Update(deltaTime);
+            if (ScreenState == ScreenState.Active)
+                InputManager.Update(deltaTime);
+
+            switch (ScreenState)
+            {
+                case ScreenState.Active:
+                    return;
+                case ScreenState.TransitionOn:
+                    FadeIn(deltaTime);
+                    break;
+                default:
+                    FadeOut(deltaTime);
+                    break;
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            if (_fadeAlpha <= 0) return;
+            spriteBatch.Begin();
+            spriteBatch.Draw(ContentChest.Pixel, new Rectangle(0, 0, ScreenSettings.Width, ScreenSettings.Height),
+                Color.Black * _fadeAlpha);
+            spriteBatch.End();
+        }
+
+        public void SetState(ScreenState state)
+        {
+            ScreenState = state;
+        }
+
+        public void AddOnQuitListener(Action onQuit)
+        {
+            _onQuit += onQuit;
+        }
+
+        private void FadeOut(float deltaTime)
+        {
+            _fadeAlpha += FadeSpeed;
+            if (_fadeAlpha >= 1) ScreenState = ScreenState.InActive;
+        }
+
+        private void FadeIn(float deltaTime)
+        {
+            _fadeAlpha -= FadeSpeed;
+            if (_fadeAlpha <= 0) ScreenState = ScreenState.Active;
+        }
+
+        protected virtual void Quit()
+        {
+            _onQuit?.Invoke();
         }
     }
 }

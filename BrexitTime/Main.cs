@@ -3,6 +3,7 @@ using BrexitTime.Managers;
 using BrexitTime.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace BrexitTime
 {
@@ -15,18 +16,30 @@ namespace BrexitTime
 
         public Main()
         {
-            Graphics = new GraphicsDeviceManager(this);
+            Graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = 1280,
+                PreferredBackBufferHeight = 720
+            };
+
             Content.RootDirectory = "Content";
             _contentChest =
                 new ContentChest(
                     Content); // We load all our resources in the content chest, so we can easily access them.
         }
 
+        public Vector2 MousePosition
+        {
+            get
+            {
+                var mouseState = Mouse.GetState();
+                return new Vector2(mouseState.X, mouseState.Y);
+            }
+        }
+
         protected override void Initialize()
         {
-            IsMouseVisible = true; // TODO Mouse sprite, get rid of default.
-
-            _screenManager = new ScreenManager(_contentChest); // Hold the state of the screens.
+            _screenManager = new ScreenManager(this, _contentChest); // Hold the state of the screens.
             ScreenSettings.Initialise(Graphics); // We can store some constants here that we can use throughout.
             base.Initialize();
         }
@@ -54,8 +67,14 @@ namespace BrexitTime
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
+            GraphicsDevice.Clear(Color.White);
             _screenManager.Draw(_spriteBatch); // Draw the list of active screens.
+
+            _spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
+
+            _spriteBatch.Draw(_contentChest.Cursor, MousePosition, Color.White);
+            _spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

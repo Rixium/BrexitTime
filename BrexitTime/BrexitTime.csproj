@@ -45,6 +45,7 @@
     <Compile Include="Constants\ScreenSettings.cs" />
     <Compile Include="ContentChest.cs" />
     <Compile Include="Enums\Alignment.cs" />
+    <Compile Include="Enums\ScreenState.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\ScreenManager.cs" />

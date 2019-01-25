@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using BrexitTime.Enums;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BrexitTime.Screens
 {
@@ -9,5 +11,7 @@ namespace BrexitTime.Screens
         void Initialise();
         void Update(float deltaTime);
         void Draw(SpriteBatch spriteBatch);
+        void SetState(ScreenState transitionOn);
+        void AddOnQuitListener(Action onQuit);
     }
 }
