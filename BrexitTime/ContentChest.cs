@@ -17,6 +17,7 @@ namespace BrexitTime
         public Texture2D Pixel { get; set; }
         public SpriteFont MainFont { get; set; }
         public Texture2D Splash { get; set; }
+        public Texture2D GameBackground { get; set; }
 
         public void Load()
         {
@@ -26,6 +27,8 @@ namespace BrexitTime
             Splash = Load<Texture2D>("splash");
             Pixel = Load<Texture2D>("pixel");
             MainFont = Load<SpriteFont>("Fonts/MainFont");
+            GameBackground = Load<Texture2D>("Background/background");
+
         }
 
         // Quick function to make loading a little more straight forward.
