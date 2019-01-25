@@ -20,11 +20,6 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/MainFont.spritefont
 
-#begin Fonts/slkscr.ttf
-/importer:
-/processor:
-/build:Fonts/slkscr.ttf
-
 #begin UI/button.png
 /importer:TextureImporter
 /processor:TextureProcessor

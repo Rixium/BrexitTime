@@ -42,10 +42,18 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constants\ScreenSettings.cs" />
     <Compile Include="ContentChest.cs" />
+    <Compile Include="Enums\Alignment.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Managers\ScreenManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screens\IScreen.cs" />
+    <Compile Include="Screens\MainMenuScreen.cs" />
+    <Compile Include="Screens\Screen.cs" />
+    <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

@@ -1,4 +1,6 @@
-﻿using BrexitTime.Managers;
+﻿using BrexitTime.Constants;
+using BrexitTime.Managers;
+using BrexitTime.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -22,14 +24,20 @@ namespace BrexitTime
 
         protected override void Initialize()
         {
+            IsMouseVisible = true; // TODO Mouse sprite, get rid of default.
+
             _screenManager = new ScreenManager(_contentChest); // Hold the state of the screens.
+            ScreenSettings.Initialise(Graphics); // We can store some constants here that we can use throughout.
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _contentChest.Load(); // Load all the required resources here.
+            _contentChest.Load(); // Load all the required resources here.            
+
+
+            _screenManager.AddScreen(new MainMenuScreen());
         }
 
         protected override void UnloadContent()

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BrexitTime
 {
@@ -11,9 +12,20 @@ namespace BrexitTime
             _contentManager = contentManager;
         }
 
+        public Texture2D ButtonBackground { get; set; }
+        public SpriteFont MainFont { get; set; }
+
         public void Load()
         {
             // Load all assets in here.
+            ButtonBackground = Load<Texture2D>("UI/button");
+            MainFont = Load<SpriteFont>("Fonts/MainFont");
+        }
+
+        // Quick function to make loading a little more straight forward.
+        private T Load<T>(string path)
+        {
+            return _contentManager.Load<T>(path);
         }
     }
 }
