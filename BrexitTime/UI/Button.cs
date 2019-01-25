@@ -36,7 +36,6 @@ namespace BrexitTime.UI
 
         public override void Click()
         {
-            Console.WriteLine($"{_text} button clicked.");
         }
 
         public override void Draw(SpriteBatch spriteBatch)
