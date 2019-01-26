@@ -35,11 +35,18 @@ namespace BrexitTime
         public Texture2D EUPodium { get; set; }
         public Texture2D Shadow { get; set; }
         public Texture2D Stage { get; set; }
+        public Texture2D AudiencePerson { get; set; }
+        public Texture2D StageBackground { get; set; }
         public SoundEffect Click { get; set; }
+        public SoundEffect Select { get; set; }
+        public SoundEffect Start { get; set; }
+        public SoundEffect Audience { get; set; }
 
         public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
         public Dictionary<string, Texture2D> Characters { get; set; } = new Dictionary<string, Texture2D>();
         public Dictionary<string, Texture2D> Portraits { get; set; } = new Dictionary<string, Texture2D>();
+        public Dictionary<string, SoundEffect> SelectionClips { get; set; } = new Dictionary<string, SoundEffect>();
+        public List<Texture2D> AudiencePeople = new List<Texture2D>();
         public Texture2D PortraitBackground { get; set; }
 
         public void Load()
@@ -59,7 +66,14 @@ namespace BrexitTime
             Logo = Load<Texture2D>("logo");
             Shadow = Load<Texture2D>("gameobjects/shadow");
             Stage = Load<Texture2D>("Background/stage");
+            StageBackground = Load<Texture2D>("Background/stage_background");
             Click = Load<SoundEffect>("SoundEffects/click");
+            Select = Load<SoundEffect>("SoundEffects/select");
+            Start = Load<SoundEffect>("SoundEffects/start");
+            Audience = Load<SoundEffect>("SoundEffects/audience");
+            AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_1"));
+            AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_2"));
+            AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_3"));
 
             PortraitBackground = Load<Texture2D>("Portraits/Portrait_Background");
 
@@ -71,6 +85,10 @@ namespace BrexitTime
             Characters.Add("Jeremy", Load<Texture2D>("Characters/Jeremy"));
             Characters.Add("Boris", Load<Texture2D>("Characters/Boris"));
             Characters.Add("Theresa", Load<Texture2D>("Characters/Theresa"));
+
+            SelectionClips.Add("Jeremy", Load<SoundEffect>("SoundEffects/Selections/Jeremy"));
+            SelectionClips.Add("Boris", Load<SoundEffect>("SoundEffects/Selections/Boris"));
+            SelectionClips.Add("Theresa", Load<SoundEffect>("SoundEffects/Selections/Theresa"));
 
             Portraits.Add("Jeremy", Load<Texture2D>("Portraits/Jeremy_Portrait"));
             Portraits.Add("Boris", Load<Texture2D>("Portraits/Boris_Portrait"));

@@ -6,6 +6,7 @@ using BrexitTime.Enums;
 using BrexitTime.Games;
 using BrexitTime.UI;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -17,10 +18,19 @@ namespace BrexitTime.Screens
 
         public Character character1;
         public Character character2;
+        private Audience audience;
+
+        private float pulseTimer = 0;
+
+        private bool c1LockedIn = false;
+        private bool c2LockedIn = false;
+
         public int maxSelection;
 
         public int selectedC1;
         public int selectedC2;
+
+        private SoundEffectInstance soundEffect;
 
         public override void Initialise()
         {
@@ -56,6 +66,7 @@ namespace BrexitTime.Screens
                         ScreenSettings.ScreenCenter.Y - requiredHeight / 2 + curr * (height + padding * 2)),
                     Alignment.CENTER);
                 _playerButtons.Add(cButton);
+                
                 curr++;
             }
 
@@ -69,8 +80,53 @@ namespace BrexitTime.Screens
             InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.LeftThumbstickDown), PlayerOneSelect);
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.LeftThumbstickUp), PlayerTwoSelect);
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.LeftThumbstickDown), PlayerTwoSelect);
+
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.A), PlayerOneLockIn);
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.B), Back);
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.Start), StartGame);
+            InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.A), PlayerTwoLockIn);
+
+            soundEffect = ContentChest.Audience.CreateInstance();
+            soundEffect.IsLooped = true;
+            soundEffect.Play();
+
+            audience = new Audience(ContentChest);
             base.Initialise();
         }
+
+        private void Back(InputCommand obj)
+        {
+            ChangeScreen(new MainMenuScreen());
+            AudioManager.OnButtonClick(null);
+        }
+
+        private void StartGame(InputCommand obj)
+        {
+            soundEffect.Stop(true);
+            AudioManager.OnStart();
+            ChangeScreen(new GameScreen(character1, character2, audience));
+        }
+
+        private void PlayerTwoLockIn(InputCommand obj)
+        {
+            c2LockedIn = true;
+            ContentChest.SelectionClips[character2.CharacterData.Name].Play();
+            AudioManager.OnSelect();
+        }
+
+        private void PlayerOneLockIn(InputCommand obj)
+        {
+            if (c1LockedIn && c2LockedIn)
+            {
+                StartGame(null);
+                return;
+            }
+
+            ContentChest.SelectionClips[character1.CharacterData.Name].Play();
+            AudioManager.OnSelect();
+            c1LockedIn = true;
+        }
+        
 
         private void PlayerTwoSelect(InputCommand obj)
         {
@@ -106,8 +162,9 @@ namespace BrexitTime.Screens
 
             selectedC2 = MathHelper.Clamp(selectedC2, 0, maxSelection);
             if (selectedC2 == last) return;
+            AudioManager.OnButtonClick(null);
             SelectPlayerTwo();
-
+            c2LockedIn = false;
             _playerButtons[last].Hover(false);
         }
 
@@ -162,8 +219,9 @@ namespace BrexitTime.Screens
 
             if (selectedC1 == last) return;
 
+            AudioManager.OnButtonClick(null);
             SelectPlayerOne();
-
+            c1LockedIn = false;
             _playerButtons[last].Hover(false);
         }
 
@@ -183,6 +241,8 @@ namespace BrexitTime.Screens
 
         public override void Update(float deltaTime)
         {
+            pulseTimer += deltaTime * 3;
+            audience.Update(deltaTime);
             base.Update(deltaTime);
         }
 
@@ -190,9 +250,10 @@ namespace BrexitTime.Screens
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
+            spriteBatch.Draw(ContentChest.StageBackground, new Rectangle(0, 0, ScreenSettings.Width, ScreenSettings.Height), Color.White);
             spriteBatch.Draw(ContentChest.Stage,
-                new Rectangle(0, ScreenSettings.Height - ContentChest.Stage.Height * 6, 1280,
-                    ContentChest.Stage.Height * 10), Color.White);
+                new Rectangle(0, ScreenSettings.Height - ContentChest.Stage.Height / 2, 1280,
+                    ContentChest.Stage.Height), Color.White);
             spriteBatch.Draw(ContentChest.Shadow,
                 new Rectangle(100, ScreenSettings.Height / 2 - 65, ContentChest.EUPodium.Width * 2,
                     ContentChest.EUPodium.Height * 2), Color.Black * 0.8f);
@@ -212,15 +273,42 @@ namespace BrexitTime.Screens
                     ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.UKPodium.Width * 2,
                     ContentChest.UKPodium.Height * 2), Color.White);
 
+            audience.Draw(spriteBatch);
+
             foreach (var b in _playerButtons)
                 b.Draw(spriteBatch);
 
             var text = "CHOOSE YOUR CHARACTER";
             var size = ContentChest.TitleFont.MeasureString(text);
             spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 20),
-                Color.Black);
+                Color.White);
+
+            DrawButtons(spriteBatch);
             spriteBatch.End();
             base.Draw(spriteBatch);
         }
+
+        private void DrawButtons(SpriteBatch spriteBatch)
+        {
+            var b1 = ContentChest.GamepadButtons[ButtonType.A];
+            var b1Pos = new Rectangle(ScreenSettings.Width / 2 - b1.Width / 2, ScreenSettings.Height - b1.Height - 20, b1.Width, b1.Height);
+
+
+            var text = "Select Character";
+
+            if (c1LockedIn && c2LockedIn)
+                text = "Start Game";
+
+            var textSize = ContentChest.MainFont.MeasureString(text);
+            spriteBatch.DrawString(ContentChest.MainFont, text, new Vector2(b1Pos.X + b1.Width / 2 - textSize.X / 2, b1Pos.Y - textSize.Y - 5), Color.White);
+
+            if (Math.Abs(Math.Floor(pulseTimer) % 2) == 0)
+            {
+                b1Pos = new Rectangle(ScreenSettings.Width / 2 - (b1.Width - 10) / 2, ScreenSettings.Height - (b1.Height) - 20, b1.Width - 10, b1.Height - 10);
+            }
+
+            spriteBatch.Draw(b1, b1Pos, Color.White);
+        }
+
     }
 }

@@ -48,6 +48,8 @@
     <Compile Include="Enums\Bias.cs" />
     <Compile Include="Enums\ButtonType.cs" />
     <Compile Include="Enums\ScreenState.cs" />
+    <Compile Include="Games\Audience.cs" />
+    <Compile Include="Games\AudienceMember.cs" />
     <Compile Include="Games\CharacterData.cs" />
     <Compile Include="Games\Character.cs" />
     <Compile Include="InputCommand.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\CharacterSelectScreen.cs" />
+    <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\IScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
     <Compile Include="Screens\Screen.cs" />

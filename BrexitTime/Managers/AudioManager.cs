@@ -15,5 +15,15 @@ namespace BrexitTime.Managers
         {
             _contentChest.Click.Play();
         }
+
+        public void OnSelect()
+        {
+            _contentChest.Select.Play();
+        }
+
+        public void OnStart()
+        {
+            _contentChest.Start.Play();
+        }
     }
 }
