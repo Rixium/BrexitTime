@@ -11,12 +11,14 @@ namespace BrexitTime.Games
     {
         public List<AudienceMember> Members = new List<AudienceMember>();
         public Random _random = new Random();
+        private ContentChest _contentChest;
 
         public int Brexiteers { get; private set; }
         public int Remainers { get; private set; }
 
         public Audience(ContentChest contentChest)
         {
+            _contentChest = contentChest;
             for (var i = 0; i < ScreenSettings.Width; i += 20)
             {
                 var spawnMember = _random.Next(0, 100) <= 80;
@@ -44,6 +46,19 @@ namespace BrexitTime.Games
                 case Bias.Remain:
                     Remainers++;
                     break;
+            }
+
+
+            if (_random.Next(0, 1000) < 50)
+            {
+                var total = Brexiteers + Remainers;
+                var brexitOrRemain = _random.Next(0, total);
+
+                if (brexitOrRemain < Brexiteers)
+                {
+                    _contentChest.Leaves[_random.Next(0, _contentChest.Leaves.Count)].Play();
+                }
+                else _contentChest.Remains[_random.Next(0, _contentChest.Remains.Count)].Play();
             }
         }
 

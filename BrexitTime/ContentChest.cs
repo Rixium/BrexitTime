@@ -44,6 +44,9 @@ namespace BrexitTime
         public SoundEffect Audience { get; set; }
         public SoundEffect Answer { get; set; }
 
+        public List<SoundEffect> Remains { get; set; } = new List<SoundEffect>();
+        public List<SoundEffect> Leaves { get; set; } = new List<SoundEffect>();
+
         public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
         public Dictionary<string, Texture2D> Characters { get; set; } = new Dictionary<string, Texture2D>();
         public Dictionary<string, Texture2D> Portraits { get; set; } = new Dictionary<string, Texture2D>();
@@ -78,6 +81,11 @@ namespace BrexitTime
             AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_2"));
             AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_3"));
 
+            for (var i = 1; i <= 7; i++)
+            {
+                Remains.Add(Load<SoundEffect>("SoundEffects/Crowd/remain_" + i));
+                Leaves.Add(Load<SoundEffect>("SoundEffects/Crowd/leave_" + i));
+            }
             PortraitBackground = Load<Texture2D>("Portraits/Portrait_Background");
 
             GamepadButtons.Add(ButtonType.X, Load<Texture2D>("UI/Xbox_X"));

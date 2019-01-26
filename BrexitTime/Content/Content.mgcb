@@ -369,29 +369,95 @@
 /processorParam:Quality=Best
 /build:SoundEffects/audience.wav
 
-#begin SoundEffects/audience.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/audience.wav
-
 #begin SoundEffects/click.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/click.wav
 
-#begin SoundEffects/click.wav
+#begin SoundEffects/Crowd/leave_1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:SoundEffects/click.wav
+/build:SoundEffects/Crowd/leave_1.wav
 
-#begin SoundEffects/select.wav
+#begin SoundEffects/Crowd/leave_2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:SoundEffects/select.wav
+/build:SoundEffects/Crowd/leave_2.wav
+
+#begin SoundEffects/Crowd/leave_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/leave_3.wav
+
+#begin SoundEffects/Crowd/leave_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/leave_4.wav
+
+#begin SoundEffects/Crowd/leave_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/leave_5.wav
+
+#begin SoundEffects/Crowd/leave_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/leave_6.wav
+
+#begin SoundEffects/Crowd/leave_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/leave_7.wav
+
+#begin SoundEffects/Crowd/remain_1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_1.wav
+
+#begin SoundEffects/Crowd/remain_2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_2.wav
+
+#begin SoundEffects/Crowd/remain_3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_3.wav
+
+#begin SoundEffects/Crowd/remain_4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_4.wav
+
+#begin SoundEffects/Crowd/remain_5.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_5.wav
+
+#begin SoundEffects/Crowd/remain_6.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_6.wav
+
+#begin SoundEffects/Crowd/remain_7.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Crowd/remain_7.wav
 
 #begin SoundEffects/select.wav
 /importer:WavImporter
@@ -405,18 +471,6 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Selections/boris.wav
 
-#begin SoundEffects/Selections/boris.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Selections/boris.wav
-
-#begin SoundEffects/Selections/jeremy.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Selections/jeremy.wav
-
 #begin SoundEffects/Selections/jeremy.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -428,18 +482,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/Selections/theresa.wav
-
-#begin SoundEffects/Selections/theresa.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/Selections/theresa.wav
-
-#begin SoundEffects/start.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:SoundEffects/start.wav
 
 #begin SoundEffects/start.wav
 /importer:WavImporter
