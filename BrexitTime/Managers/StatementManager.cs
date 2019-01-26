@@ -129,20 +129,30 @@ namespace BrexitTime.Managers
             if (_activeStatement == null) return;
 
             var size = _contentChest.QuestionFont.MeasureString(CurrentText);
+            var fullSize = _contentChest.QuestionFont.MeasureString(_activeStatement.Body);
+            spriteBatch.Draw(_contentChest.Pixel, new Rectangle((int)(ScreenSettings.ScreenCenter.X - fullSize.X / 2 - 10), 40 - 10, (int)fullSize.X + 20, (int)fullSize.Y + 20), Color.Black * 0.5f);
+
+            spriteBatch.DrawString(_contentChest.QuestionFont, CurrentText,
+                new Vector2(ScreenSettings.ScreenCenter.X - size.X / 2, 42), Color.Black);
+
             spriteBatch.DrawString(_contentChest.QuestionFont, CurrentText,
                 new Vector2(ScreenSettings.ScreenCenter.X - size.X / 2, 40), Color.White);
-
+            
             for (var i = 0; i < _activeAnswers; i++)
             {
                 var answer = _activeStatement.Answers[i];
                 var answerSize = _contentChest.MainFont.MeasureString(answer.Text);
                 var b = _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]][GamePad.GetCapabilities(0).DisplayName];
-                var b2 = _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]][GamePad.GetCapabilities(1).DisplayName];
+                var b2 = b;
+
+                if (GamePad.GetCapabilities(1).IsConnected)
+                    b2 = _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]][
+                        GamePad.GetCapabilities(1).DisplayName];
 
                 var textPos = new Vector2(ScreenSettings.ScreenCenter.X - answerSize.X / 2,
                     ScreenSettings.ScreenCenter.Y - 4 * (30 + answerSize.Y) + i * (answerSize.Y + 30));
 
-
+                
                 if (!answer.Used)
                 {
                     if (SelectedP1 == null)
@@ -155,6 +165,9 @@ namespace BrexitTime.Managers
                         spriteBatch.Draw(b2,
                             new Rectangle((int) (ScreenSettings.ScreenCenter.X + 200), (int) textPos.Y, 32, 32),
                             Color.White);
+
+                    spriteBatch.DrawString(_contentChest.MainFont, answer.Text, new Vector2(textPos.X, textPos.Y + 2),
+                        Color.Black * 0.5f);
                     spriteBatch.DrawString(_contentChest.MainFont, answer.Text, textPos, Color.White);
                 }
                 else
@@ -168,6 +181,9 @@ namespace BrexitTime.Managers
 
             if (_activeAnswers < 4) return;
             var text = Math.Ceiling(_countDown).ToString(CultureInfo.InvariantCulture);
+            spriteBatch.DrawString(_contentChest.TitleFont, text,
+                new Vector2(ScreenSettings.Width / 2 - _contentChest.TitleFont.MeasureString(text).X / 2, 102),
+                Color.Black * 0.5f);
             spriteBatch.DrawString(_contentChest.TitleFont, text,
                 new Vector2(ScreenSettings.Width / 2 - _contentChest.TitleFont.MeasureString(text).X / 2, 100),
                 Color.White);

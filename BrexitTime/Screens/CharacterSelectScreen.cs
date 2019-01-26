@@ -316,7 +316,9 @@ namespace BrexitTime.Screens
         {
             var showOne = false;
             var b1 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(0).DisplayName];
-            var b2 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(1).DisplayName];
+            var b2 = b1;
+            if(GamePad.GetCapabilities(1).IsConnected)
+                b2 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(1).DisplayName];
             
             
             var b1Pos = new Rectangle(ScreenSettings.Width / 2 - b1.Width / 2 - b1.Width - 10, ScreenSettings.Height - b1.Height - 20, b1.Width, b1.Height);
@@ -331,7 +333,8 @@ namespace BrexitTime.Screens
             }
 
 
-            if (GamePad.GetCapabilities(0).DisplayName == GamePad.GetCapabilities(1).DisplayName || showOne)
+            if (GamePad.GetCapabilities(0).DisplayName == GamePad.GetCapabilities(1).DisplayName || showOne
+                || GamePad.GetCapabilities(1).IsConnected == false)
             {
                 b1Pos = new Rectangle(ScreenSettings.Width / 2 - b1.Width / 2, ScreenSettings.Height - b1.Height - 20, b1.Width, b1.Height);
                 showOne = true;
