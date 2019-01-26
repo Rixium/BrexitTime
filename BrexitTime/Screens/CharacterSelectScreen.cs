@@ -29,6 +29,16 @@ namespace BrexitTime.Screens
             var text = "CHOOSE YOUR CHARACTER";
             var size = ContentChest.TitleFont.MeasureString(text);
             spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 20), Color.Black);
+
+            var curr = 1;
+            foreach (var c in ContentChest.Characters)
+            {
+                var cName = c.Name;
+                var s = ContentChest.MainFont.MeasureString(cName);
+                spriteBatch.DrawString(ContentChest.MainFont, cName, new Vector2(ScreenSettings.Width / 2 - s.X / 2, ScreenSettings.Height / 2 + s.Y * curr + 10 * curr), Color.Black);
+                curr++;
+            }
+
             spriteBatch.End();
             base.Draw(spriteBatch);
         }

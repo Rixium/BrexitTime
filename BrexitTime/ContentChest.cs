@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework.Audio;
+﻿using System.Collections.Generic;
+using System.IO;
+using BrexitTime.Games;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
+using Newtonsoft.Json;
 
 namespace BrexitTime
 {
@@ -14,6 +18,7 @@ namespace BrexitTime
             _contentManager = contentManager;
         }
 
+        public List<Character> Characters { get; set; }
         public Song MainSong { get; set; }
         public Texture2D ButtonBackground { get; set; }
         public Texture2D ButtonBackground_Pressed { get; set; }
@@ -49,6 +54,14 @@ namespace BrexitTime
             Shadow = Load<Texture2D>("gameobjects/shadow");
             Stage = Load<Texture2D>("Background/stage");
             Click = Load<SoundEffect>("SoundEffects/click");
+
+            LoadCharacterData();
+        }
+
+        private void LoadCharacterData()
+        {
+            var text = File.ReadAllText("Content/Data/Characters.json");
+            Characters = JsonConvert.DeserializeObject<List<Character>>(text);
         }
 
         // Quick function to make loading a little more straight forward.
