@@ -1,4 +1,5 @@
 ﻿using BrexitTime.Constants;
+using BrexitTime.Enums;
 using BrexitTime.Managers;
 using BrexitTime.Screens;
 using Microsoft.Xna.Framework;
@@ -51,7 +52,7 @@ namespace BrexitTime
             _contentChest.Load(); // Load all the required resources here.            
 
 
-            _screenManager.AddScreen(new CharacterSelectScreen());
+            _screenManager.AddScreen(new ResultScreen(Bias.Remain));
         }
 
         protected override void UnloadContent()

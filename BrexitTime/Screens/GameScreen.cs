@@ -6,6 +6,7 @@ using BrexitTime.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Random = System.Random;
 
 namespace BrexitTime.Screens
 {
@@ -14,19 +15,19 @@ namespace BrexitTime.Screens
         private readonly Audience _audience;
         private readonly Character _playerOne;
         private readonly Character _playerTwo;
-        private readonly System.Random _random;
+        private readonly Random _random;
 
         private Statement _activeStatement;
+        private BrexitBar _brexitBar;
         private StatementManager _statementManager;
         private bool debug;
-        private BrexitBar _brexitBar;
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
             _playerOne = playerOne;
             _playerTwo = playerTwo;
             _audience = audience;
-            _random = new System.Random();
+            _random = new Random();
         }
 
         public override void Initialise()
@@ -96,7 +97,7 @@ namespace BrexitTime.Screens
 
             _brexitBar.SetBrexit(_audience.Brexiteers);
             _brexitBar.SetRemain(_audience.Remainers);
-            
+
             if (ScreenState == ScreenState.Active) _statementManager.Update(deltaTime);
 
             base.Update(deltaTime);

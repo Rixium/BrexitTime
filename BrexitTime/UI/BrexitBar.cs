@@ -10,11 +10,11 @@ namespace BrexitTime.UI
         private readonly Texture2D _leaveBar;
         private readonly Texture2D _remainBar;
 
-        public int Brexiteers;
+        public float Brexiteers;
         public Texture2D Pixel;
 
         public Vector2 Position;
-        public int Remainers;
+        public float Remainers;
 
         public BrexitBar(Texture2D border, Texture2D leaveBar, Texture2D remainBar)
         {
@@ -25,14 +25,14 @@ namespace BrexitTime.UI
                 ScreenSettings.Height - Border.Height - 10);
         }
 
-        public void SetBrexit(int brexit)
+        public void SetBrexit(float brexitBias)
         {
-            Brexiteers = brexit;
+            Brexiteers = brexitBias;
         }
 
-        public void SetRemain(int rem)
+        public void SetRemain(float remainBias)
         {
-            Remainers = rem;
+            Remainers = remainBias;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -42,7 +42,7 @@ namespace BrexitTime.UI
                 Border.Height - 4);
             spriteBatch.Draw(_leaveBar, r, Color.Red);
 
-            var width = (float) Remainers / (Brexiteers + Remainers);
+            var width = Remainers / (Brexiteers + Remainers);
             spriteBatch.Draw(_remainBar, new Rectangle(r.X, r.Y, (int)(r.Width * width), r.Height), Color.Blue);
         }
     }

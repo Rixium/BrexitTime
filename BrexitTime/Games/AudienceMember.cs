@@ -40,6 +40,8 @@ namespace BrexitTime.Games
             _bias = MathHelper.Clamp(_bias, 0, 1);
         }
 
+        public float RealBias => _bias;
+
         public void Update(float deltaTime)
         {
             wiggleTimer -= deltaTime;

@@ -17,6 +17,10 @@ namespace BrexitTime.Games
 
         public int Rowdiness = 20;
 
+        public float TotalBias => RemainBias + LeaveBias;
+        public float RemainBias = 0;
+        public float LeaveBias = 0;
+
         public Audience(ContentChest contentChest)
         {
             _contentChest = contentChest;
@@ -38,6 +42,21 @@ namespace BrexitTime.Games
                     _random, memberBias);
                 mem.OnBiasChanged += OnBiasChanged;
                 Members.Add(mem);
+
+            }
+            
+            CalculateRemainBias();
+
+        }
+
+        private void CalculateRemainBias()
+        {
+            foreach (var m in Members)
+            {
+                if (m.RealBias <= 0.5)
+                {
+                    RemainBias += m.RealBias;
+                } else LeaveBias += 1 - m.RealBias;
             }
         }
 
@@ -50,11 +69,12 @@ namespace BrexitTime.Games
             {
                 Remainers++;
                 Brexiteers--;
-                return;
             }
-
-            Remainers--;
-            Brexiteers++;
+            else
+            {
+                Remainers--;
+                Brexiteers++;
+            }
 
 
             if(Brexiteers == 0 || Remainers == 0)
