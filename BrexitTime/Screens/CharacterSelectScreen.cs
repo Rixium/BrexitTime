@@ -13,23 +13,24 @@ namespace BrexitTime.Screens
 {
     public class CharacterSelectScreen : Screen
     {
-
         public List<UIElement> _playerButtons;
-
-        public int selectedC1 = 0;
-        public int selectedC2 = 0;
-        public int maxSelection;
 
         public Character character1;
         public Character character2;
+        public int maxSelection;
+
+        public int selectedC1;
+        public int selectedC2;
 
         public override void Initialise()
         {
             var c1 = ContentChest.CharacterData[0];
             var c2 = ContentChest.CharacterData[2];
 
-            var c1Position = new Rectangle(100, ScreenSettings.Height / 2 - ContentChest.Characters[c1.Name].Height / 2, ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
-            var c2Position = new Rectangle(ScreenSettings.Width - 100 - ContentChest.Characters[c1.Name].Width / 2, c1Position.Y, ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
+            var c1Position = new Rectangle(100, ScreenSettings.Height / 2 - ContentChest.Characters[c1.Name].Height / 2,
+                ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
+            var c2Position = new Rectangle(ScreenSettings.Width - 100 - ContentChest.Characters[c1.Name].Width / 2,
+                c1Position.Y, ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
 
             character1 = new Character(ContentChest.Characters[c1.Name], c1Position, c1);
             character2 = new Character(ContentChest.Characters[c2.Name], c2Position, c2)
@@ -47,13 +48,13 @@ namespace BrexitTime.Screens
             var curr = 0;
             foreach (var c in ContentChest.CharacterData)
             {
-                if (ContentChest.Portraits.ContainsKey(c.Name) == false)
-                {
-                    continue;
-                }
+                if (ContentChest.Portraits.ContainsKey(c.Name) == false) continue;
 
                 var cPortrait = ContentChest.Portraits[c.Name];
-                var cButton = new CharacterButton(c.Name, ContentChest.PortraitBackground, cPortrait, new Vector2(ScreenSettings.ScreenCenter.X, ScreenSettings.ScreenCenter.Y - requiredHeight / 2 + curr * (height + padding * 2)), Alignment.CENTER);
+                var cButton = new CharacterButton(c.Name, ContentChest.PortraitBackground, cPortrait,
+                    new Vector2(ScreenSettings.ScreenCenter.X,
+                        ScreenSettings.ScreenCenter.Y - requiredHeight / 2 + curr * (height + padding * 2)),
+                    Alignment.CENTER);
                 _playerButtons.Add(cButton);
                 curr++;
             }
@@ -86,13 +87,12 @@ namespace BrexitTime.Screens
 
             selectedC2 = MathHelper.Clamp(selectedC2, 0, maxSelection);
 
-            var button = ((CharacterButton)_playerButtons[selectedC2]);
+            var button = (CharacterButton) _playerButtons[selectedC2];
             if (button.Hovering && button.HoverColor != Color.Red * 0.5f)
             {
                 if (selectedC2 == 0 || selectedC2 == maxSelection)
                     selectedC2 = last;
                 else
-                {
                     switch (obj.Button)
                     {
                         case Buttons.LeftThumbstickUp:
@@ -102,26 +102,26 @@ namespace BrexitTime.Screens
                             selectedC2++;
                             break;
                     }
-                }
             }
 
             selectedC2 = MathHelper.Clamp(selectedC2, 0, maxSelection);
             if (selectedC2 == last) return;
             SelectPlayerTwo();
-            
+
             _playerButtons[last].Hover(false);
         }
 
         private void SelectPlayerTwo()
         {
-            var button = ((CharacterButton) _playerButtons[selectedC2]);
+            var button = (CharacterButton) _playerButtons[selectedC2];
 
             if (button.Hovering && button.HoverColor != Color.Red * 0.5f) return;
 
             button.HoverColor = Color.Red * 0.5f;
             _playerButtons[selectedC2].Hover(true);
             character2.CharacterData =
-                ContentChest.CharacterData.First(c => c.Name.Equals(button.Character, StringComparison.OrdinalIgnoreCase));
+                ContentChest.CharacterData.First(c =>
+                    c.Name.Equals(button.Character, StringComparison.OrdinalIgnoreCase));
             character2.Texture = ContentChest.Characters[button.Character];
         }
 
@@ -139,14 +139,13 @@ namespace BrexitTime.Screens
             }
 
             selectedC1 = MathHelper.Clamp(selectedC1, 0, maxSelection);
-            
-            var button = ((CharacterButton)_playerButtons[selectedC1]);
+
+            var button = (CharacterButton) _playerButtons[selectedC1];
             if (button.Hovering && button.HoverColor != Color.Blue * 0.5f)
             {
                 if (selectedC1 == 0 || selectedC1 == maxSelection)
                     selectedC1 = last;
                 else
-                {
                     switch (obj.Button)
                     {
                         case Buttons.LeftThumbstickUp:
@@ -156,7 +155,6 @@ namespace BrexitTime.Screens
                             selectedC1++;
                             break;
                     }
-                }
             }
 
 
@@ -165,20 +163,21 @@ namespace BrexitTime.Screens
             if (selectedC1 == last) return;
 
             SelectPlayerOne();
-            
+
             _playerButtons[last].Hover(false);
         }
 
         private void SelectPlayerOne()
         {
-            var button = ((CharacterButton)_playerButtons[selectedC1]);
+            var button = (CharacterButton) _playerButtons[selectedC1];
             if (button.Hovering && button.HoverColor != Color.Blue * 0.5f) return;
 
             button.HoverColor = Color.Blue * 0.5f;
             _playerButtons[selectedC1].Hover(true);
 
             character1.CharacterData =
-                ContentChest.CharacterData.First(c => c.Name.Equals(button.Character, StringComparison.OrdinalIgnoreCase));
+                ContentChest.CharacterData.First(c =>
+                    c.Name.Equals(button.Character, StringComparison.OrdinalIgnoreCase));
             character1.Texture = ContentChest.Characters[button.Character];
         }
 
@@ -213,7 +212,7 @@ namespace BrexitTime.Screens
                     ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.UKPodium.Width * 2,
                     ContentChest.UKPodium.Height * 2), Color.White);
 
-            foreach(var b in _playerButtons)
+            foreach (var b in _playerButtons)
                 b.Draw(spriteBatch);
 
             var text = "CHOOSE YOUR CHARACTER";
