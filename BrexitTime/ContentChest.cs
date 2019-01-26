@@ -2,7 +2,6 @@
 using System.IO;
 using BrexitTime.Enums;
 using BrexitTime.Games;
-using BrexitTime.UI;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,7 +19,7 @@ namespace BrexitTime
             _contentManager = contentManager;
         }
 
-        public List<Character> Characters { get; set; }
+        public List<CharacterData> CharacterData { get; set; }
         public Song MainSong { get; set; }
         public Texture2D ButtonBackground { get; set; }
         public Texture2D ButtonBackground_Pressed { get; set; }
@@ -39,6 +38,9 @@ namespace BrexitTime
         public SoundEffect Click { get; set; }
 
         public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
+        public Dictionary<string, Texture2D> Characters { get; set; } = new Dictionary<string, Texture2D>();
+        public Dictionary<string, Texture2D> Portraits { get; set; } = new Dictionary<string, Texture2D>();
+        public Texture2D PortraitBackground { get; set; }
 
         public void Load()
         {
@@ -59,18 +61,25 @@ namespace BrexitTime
             Stage = Load<Texture2D>("Background/stage");
             Click = Load<SoundEffect>("SoundEffects/click");
 
+            PortraitBackground = Load<Texture2D>("Portraits/Portrait_Background");
+
             GamepadButtons.Add(ButtonType.X, Load<Texture2D>("UI/Xbox_X"));
             GamepadButtons.Add(ButtonType.B, Load<Texture2D>("UI/Xbox_B"));
             GamepadButtons.Add(ButtonType.Y, Load<Texture2D>("UI/Xbox_Y"));
             GamepadButtons.Add(ButtonType.A, Load<Texture2D>("UI/Xbox_A"));
 
+            Characters.Add("Jeremy", Load<Texture2D>("Characters/Jeremy"));
+            Characters.Add("Boris", Load<Texture2D>("Characters/Boris"));
+
+            Portraits.Add("Jeremy", Load<Texture2D>("Portraits/Jeremy_Portrait"));
+            Portraits.Add("Boris", Load<Texture2D>("Portraits/Boris_Portrait"));
             LoadCharacterData();
         }
 
         private void LoadCharacterData()
         {
             var text = File.ReadAllText("Content/Data/Characters.json");
-            Characters = JsonConvert.DeserializeObject<List<Character>>(text);
+            CharacterData = JsonConvert.DeserializeObject<List<CharacterData>>(text);
         }
 
         // Quick function to make loading a little more straight forward.

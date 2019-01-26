@@ -51,7 +51,7 @@ namespace BrexitTime
             _contentChest.Load(); // Load all the required resources here.            
 
 
-            _screenManager.AddScreen(new SplashScreen());
+            _screenManager.AddScreen(new CharacterSelectScreen());
         }
 
         protected override void UnloadContent()

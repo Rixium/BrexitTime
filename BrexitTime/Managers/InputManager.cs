@@ -24,6 +24,8 @@ namespace BrexitTime.Managers
         public Dictionary<Keys, ActionMap> ActionMapBindings = new Dictionary<Keys, ActionMap>();
         public Action MouseClick;
 
+        private GamePadState _lastP1State;
+        private GamePadState _lastP2State;
 
         public Action MouseHeld;
         public Action MouseReleased;
@@ -67,14 +69,31 @@ namespace BrexitTime.Managers
 
         private void ManageGamepad()
         {
+            var p1State = GamePad.GetState(0);
+            var p2State = GamePad.GetState(1);
+
             foreach (var button in _buttonMap)
             {
-                var gamepad = GamePad.GetState(button.Key.GamePadNumber);
-                if (gamepad.IsButtonDown(button.Key.Button))
+
+                switch (button.Key.GamePadNumber)
                 {
-                    button.Value?.Invoke(button.Key);
+                    case 0:
+                        if (p1State.IsButtonDown(button.Key.Button) && _lastP1State.IsButtonUp(button.Key.Button))
+                        {
+                            button.Value?.Invoke(button.Key);
+                        }
+                        break;
+                    case 1:
+                        if (p2State.IsButtonDown(button.Key.Button) && _lastP2State.IsButtonUp(button.Key.Button))
+                        {
+                            button.Value?.Invoke(button.Key);
+                        }
+                        break;
                 }
             }
+
+            _lastP1State = p1State;
+            _lastP2State = p2State;
         }
 
         private void ManageKeyboard()

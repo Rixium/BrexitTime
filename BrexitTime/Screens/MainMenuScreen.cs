@@ -45,6 +45,7 @@ namespace BrexitTime.Screens
 
             startButton.OnElementClick += AudioManager.OnButtonClick;
             startButton.OnElementClick += OnStartClicked;
+            quitButton.OnElementClick += OnQuitClicked;
             quitButton.OnElementClick += AudioManager.OnButtonClick;
 
             var pad1A = new InputCommand(0, Buttons.A);
@@ -87,7 +88,7 @@ namespace BrexitTime.Screens
             _uiElements[_hoverButton].Click();
         }
 
-        private void OnQuitClicked()
+        private void OnQuitClicked(UIElement obj)
         {
             Quit();
         }

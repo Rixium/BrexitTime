@@ -48,6 +48,7 @@
     <Compile Include="Enums\Bias.cs" />
     <Compile Include="Enums\ButtonType.cs" />
     <Compile Include="Enums\ScreenState.cs" />
+    <Compile Include="Games\CharacterData.cs" />
     <Compile Include="Games\Character.cs" />
     <Compile Include="InputCommand.cs" />
     <Compile Include="Main.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\CharacterButton.cs" />
     <Compile Include="UI\Logo.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
