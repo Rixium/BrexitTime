@@ -23,18 +23,23 @@ namespace BrexitTime.Screens
 
         public override void Initialise()
         {
+            base.Initialise();
+
             // Anything that requires use of the content chest should be in here.
             var position =
                 new Vector2(ScreenSettings.ScreenCenter.X,
                     ContentChest.Logo.Height + Padding * 2); // Button position center of screen.
-            var startButton = new Button(ContentChest.ButtonBackground, ContentChest.MainFont, "Start", position, 2,
+            var startButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed, ContentChest.MainFont, "Start", position, 2,
                 Alignment.CENTER);
-            var quitButton = new Button(ContentChest.ButtonBackground, ContentChest.MainFont, "Exit",
+            var quitButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed, ContentChest.MainFont, "Exit",
                 new Vector2(position.X, startButton.Bottom.Y + Padding), 2,
                 Alignment.CENTER);
 
             _uiElements.Add(startButton);
             _uiElements.Add(quitButton);
+
+            startButton.OnElementClick += AudioManager.OnButtonClick;
+            quitButton.OnElementClick += AudioManager.OnButtonClick;
 
             // Register all of the UI elements so that our input manager knows if they've been clicked.
             InputManager.RegisterUIElement(OnStartClicked, startButton);
@@ -63,6 +68,9 @@ namespace BrexitTime.Screens
             {
             }
 
+
+            foreach (var elem in _uiElements)
+                elem.Update(deltaTime);
 
             _logo.Update(deltaTime);
             base.Update(deltaTime);

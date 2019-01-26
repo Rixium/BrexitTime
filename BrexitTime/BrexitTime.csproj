@@ -47,6 +47,7 @@
     <Compile Include="Enums\Alignment.cs" />
     <Compile Include="Enums\ScreenState.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Managers\AudioManager.cs" />
     <Compile Include="Managers\InputManager.cs" />
     <Compile Include="Managers\ScreenManager.cs" />
     <Compile Include="Program.cs" />

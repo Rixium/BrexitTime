@@ -15,6 +15,7 @@ namespace BrexitTime.Screens
         public override void Initialise()
         {
             MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.5f;
             MediaPlayer.Play(ContentChest.MainSong);
             base.Initialise();
         }

@@ -10,6 +10,8 @@ namespace BrexitTime.Screens
     public class Screen : IScreen
     {
         protected readonly InputManager InputManager;
+        protected AudioManager AudioManager;
+
         private Action<IScreen> _changeScreen;
         private float _fadeAlpha = 1.0f;
         private Action _onQuit;
@@ -27,6 +29,7 @@ namespace BrexitTime.Screens
 
         public virtual void Initialise()
         {
+            AudioManager = new AudioManager(ContentChest);
         }
 
         public virtual void Update(float deltaTime)

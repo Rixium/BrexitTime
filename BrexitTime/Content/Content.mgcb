@@ -225,6 +225,12 @@
 /processorParam:TextureFormat=Color
 /build:pixel.png
 
+#begin SoundEffects/click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/click.wav
+
 #begin splash.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -248,4 +254,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/button.png
+
+#begin UI/button_pressed.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/button_pressed.png
 
