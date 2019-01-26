@@ -133,6 +133,18 @@
 /processorParam:TextureFormat=Color
 /build:Characters/p2_head.png
 
+#begin Characters/Theresa.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Characters/Theresa.png
+
 #begin cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -284,6 +296,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Portraits/Portrait_Background.png
+
+#begin Portraits/Theresa_Portrait.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Portraits/Theresa_Portrait.png
 
 #begin SoundEffects/click.wav
 /importer:WavImporter

@@ -32,8 +32,8 @@ namespace BrexitTime.Screens
             var c2Position = new Rectangle(ScreenSettings.Width - 100 - ContentChest.Characters[c1.Name].Width / 2,
                 c1Position.Y, ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
 
-            character1 = new Character(ContentChest.Characters[c1.Name], c1Position, c1);
-            character2 = new Character(ContentChest.Characters[c2.Name], c2Position, c2)
+            character1 = new Character(ContentChest.Characters[c1.Name], ContentChest.MainFont, c1Position, c1);
+            character2 = new Character(ContentChest.Characters[c2.Name], ContentChest.MainFont, c2Position, c2)
             {
                 FacingLeft = true
             };
@@ -219,18 +219,6 @@ namespace BrexitTime.Screens
             var size = ContentChest.TitleFont.MeasureString(text);
             spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 20),
                 Color.Black);
-
-            var curr = 1;
-            foreach (var c in ContentChest.CharacterData)
-            {
-                var cName = c.Name;
-                var s = ContentChest.MainFont.MeasureString(cName);
-                spriteBatch.DrawString(ContentChest.MainFont, cName,
-                    new Vector2(ScreenSettings.Width / 2 - s.X / 2, ScreenSettings.Height / 2 + s.Y * curr + 10 * curr),
-                    Color.Black);
-                curr++;
-            }
-
             spriteBatch.End();
             base.Draw(spriteBatch);
         }

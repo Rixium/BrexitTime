@@ -70,9 +70,11 @@ namespace BrexitTime
 
             Characters.Add("Jeremy", Load<Texture2D>("Characters/Jeremy"));
             Characters.Add("Boris", Load<Texture2D>("Characters/Boris"));
+            Characters.Add("Theresa", Load<Texture2D>("Characters/Theresa"));
 
             Portraits.Add("Jeremy", Load<Texture2D>("Portraits/Jeremy_Portrait"));
             Portraits.Add("Boris", Load<Texture2D>("Portraits/Boris_Portrait"));
+            Portraits.Add("Theresa", Load<Texture2D>("Portraits/Theresa_Portrait"));
             LoadCharacterData();
         }
 
