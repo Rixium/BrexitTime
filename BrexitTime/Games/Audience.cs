@@ -9,12 +9,11 @@ namespace BrexitTime.Games
 {
     public class Audience
     {
-        public List<AudienceMember> Members = new List<AudienceMember>();
+        private readonly ContentChest _contentChest;
         public Random _random = new Random();
-        private ContentChest _contentChest;
+        public List<AudienceMember> Members = new List<AudienceMember>();
 
-        public int Brexiteers { get; private set; }
-        public int Remainers { get; private set; }
+        public int Rowdiness = 20;
 
         public Audience(ContentChest contentChest)
         {
@@ -32,8 +31,28 @@ namespace BrexitTime.Games
 
                 var memberBias = (Bias) bias;
                 UpdateAudience(memberBias);
-                Members.Add(new AudienceMember(selection, new Vector2(i, ScreenSettings.Height - selection.Height + _random.Next(0, 30)), new Color(c, c, c), _random, memberBias));
+                var mem = new AudienceMember(selection,
+                    new Vector2(i, ScreenSettings.Height - selection.Height + _random.Next(0, 30)), new Color(c, c, c),
+                    _random, memberBias);
+                mem.OnBiasChanged += OnBiasChanged;
+                Members.Add(mem);
             }
+        }
+
+        public int Brexiteers { get; private set; }
+        public int Remainers { get; private set; }
+
+        private void OnBiasChanged(Bias obj)
+        {
+            if (obj == Bias.Remain)
+            {
+                Remainers++;
+                Brexiteers--;
+                return;
+            }
+
+            Remainers--;
+            Brexiteers++;
         }
 
         private void UpdateAudience(Bias memberBias)
@@ -48,6 +67,12 @@ namespace BrexitTime.Games
                     break;
             }
 
+            Rowdiness = Math.Max(Brexiteers, Remainers);
+
+            if (Rowdiness >= Brexiteers + Remainers)
+            {
+                Rowdiness *= 2;
+            }
         }
 
         public void Update(float deltaTime)
@@ -55,8 +80,8 @@ namespace BrexitTime.Games
             foreach (var m in Members)
                 m.Update(deltaTime);
 
-            
-            if (_random.Next(0, 1000) < 5)
+
+            if (_random.Next(0, 1000) < Rowdiness)
             {
                 var total = Brexiteers + Remainers;
                 var brexitOrRemain = _random.Next(0, total);
@@ -77,10 +102,16 @@ namespace BrexitTime.Games
                 }
             }
         }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (var m in Members)
                 m.Draw(spriteBatch);
+        }
+
+        public void Distribute(float modifier)
+        {
+            foreach (var m in Members) m.UpdateBias(modifier);
         }
     }
 }

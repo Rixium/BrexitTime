@@ -12,6 +12,8 @@ namespace BrexitTime.Managers
     public class StatementManager
     {
         private readonly float _activateAnswerMaxTime = 1.0f;
+        private readonly Character _c1;
+        private readonly Character _c2;
         private readonly ContentChest _contentChest;
         private readonly Random _random;
         private readonly float animateTime = 0.04f;
@@ -24,15 +26,17 @@ namespace BrexitTime.Managers
         private float charTimer;
         private int currLength;
         private float lastClick;
-        public Action OnCountDownEnded;
+        public Action<Answer, Answer> OnStatementEnded;
 
         public Answer SelectedP1;
         public Answer SelectedP2;
 
-        public StatementManager(ContentChest contentChest)
+        public StatementManager(ContentChest contentChest, Character c1, Character c2)
         {
             _random = new Random();
             _contentChest = contentChest;
+            _c1 = c1;
+            _c2 = c2;
         }
 
         public string CurrentText => _activeStatement == null ? "" : _activeStatement.Body.Substring(0, currLength);
@@ -77,7 +81,7 @@ namespace BrexitTime.Managers
 
             if (_countDown <= 0)
             {
-                OnCountDownEnded?.Invoke();
+                OnStatementEnded?.Invoke(SelectedP1, SelectedP2);
                 _activeStatement = null;
             }
         }
@@ -136,27 +140,28 @@ namespace BrexitTime.Managers
 
                 var textPos = new Vector2(ScreenSettings.ScreenCenter.X - answerSize.X / 2,
                     ScreenSettings.ScreenCenter.Y - 4 * (30 + answerSize.Y) + i * (answerSize.Y + 30));
-                spriteBatch.DrawString(_contentChest.MainFont, answer.Text, textPos, Color.White);
+
 
                 if (!answer.Used)
                 {
-                    spriteBatch.Draw(b,
-                        new Rectangle((int) (ScreenSettings.ScreenCenter.X - 200 - b.Width / 2), (int) textPos.Y, 32,
-                            32),
-                        Color.White);
-                    spriteBatch.Draw(b2,
-                        new Rectangle((int) (ScreenSettings.ScreenCenter.X + 200), (int) textPos.Y, 32, 32),
-                        Color.White);
+                    if (SelectedP1 == null)
+                        spriteBatch.Draw(b,
+                            new Rectangle((int) (ScreenSettings.ScreenCenter.X - 200 - b.Width / 2), (int) textPos.Y,
+                                32,
+                                32),
+                            Color.White);
+                    if (SelectedP2 == null)
+                        spriteBatch.Draw(b2,
+                            new Rectangle((int) (ScreenSettings.ScreenCenter.X + 200), (int) textPos.Y, 32, 32),
+                            Color.White);
+                    spriteBatch.DrawString(_contentChest.MainFont, answer.Text, textPos, Color.White);
                 }
                 else
                 {
-                    spriteBatch.Draw(b,
-                        new Rectangle((int) (ScreenSettings.ScreenCenter.X - 200 - b.Width / 2), (int) textPos.Y, 32,
-                            32),
-                        Color.Gray * 0.5f);
-                    spriteBatch.Draw(b2,
-                        new Rectangle((int) (ScreenSettings.ScreenCenter.X + 200), (int) textPos.Y, 32, 32),
-                        Color.Gray * 0.5f);
+                    if (answer.UsedBy == Bias.Remain)
+                        spriteBatch.DrawString(_contentChest.MainFont, answer.Text, textPos, Color.Blue * 0.8f);
+                    else
+                        spriteBatch.DrawString(_contentChest.MainFont, answer.Text, textPos, Color.Red * 0.8f);
                 }
             }
 
@@ -175,6 +180,9 @@ namespace BrexitTime.Managers
                     PlayerOneSelect(b);
                 else PlayerTwoSelect(b);
             }
+
+            if (SelectedP1 != null && SelectedP2 != null)
+                OnStatementEnded?.Invoke(SelectedP1, SelectedP2);
         }
 
         private void PlayerTwoSelect(Buttons buttons)
@@ -184,6 +192,7 @@ namespace BrexitTime.Managers
             if (answer == null) return;
 
             SelectedP2 = answer;
+            answer.UsedBy = Bias.Leave;
             _contentChest.AnswerSelect.Play();
         }
 
@@ -193,6 +202,7 @@ namespace BrexitTime.Managers
             var answer = _activeStatement.GetAnswerFor(0, ConvertButton(buttons));
             if (answer == null) return;
 
+            answer.UsedBy = Bias.Remain;
             _contentChest.AnswerSelect.Play();
             SelectedP1 = answer;
         }

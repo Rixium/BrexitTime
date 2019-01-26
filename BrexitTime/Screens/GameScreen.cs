@@ -43,8 +43,17 @@ namespace BrexitTime.Screens
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.X), ButtonDown);
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.Y), ButtonDown);
 
-            _statementManager = new StatementManager(ContentChest);
+            _statementManager = new StatementManager(ContentChest, _playerOne, _playerTwo);
+            _statementManager.OnStatementEnded += OnStatementEnded;
             base.Initialise();
+        }
+
+        private void OnStatementEnded(Answer p1Answer, Answer p2Answer)
+        {
+            if(p1Answer != null)
+                _audience.Distribute(p1Answer.BiasModifier);
+            if(p2Answer != null)
+                _audience.Distribute(p2Answer.BiasModifier);
         }
 
         private void ButtonDown(InputCommand obj)

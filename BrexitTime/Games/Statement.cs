@@ -46,7 +46,10 @@ namespace BrexitTime.Games
         public void Reset()
         {
             foreach (var answer in Answers)
+            {
                 answer.Used = false;
+                answer.UsedBy = Bias.Neutral;
+            }
         }
     }
 }

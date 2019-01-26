@@ -4,20 +4,20 @@
     "Answers": [
       {
         "Text":"More Weapons",
-        "BiasModifier":"Leave"
+        "BiasModifier":-0.2
       },
       {
         "Text": "Less Movement Restrictions",
-        "BiasModifier":"Remain"
+        "BiasModifier":0.2
       },
       {
         "Text": "Make me",
-        "BiasModifier":"Neutral"
+        "BiasModifier":0
 
       },
       {
         "Text": "Make me",
-        "BiasModifier":"Neutral"
+        "BiasModifier":0
       }
     ]
   }
