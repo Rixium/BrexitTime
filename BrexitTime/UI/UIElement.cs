@@ -38,6 +38,11 @@ namespace BrexitTime.UI
             }
         }
 
+        public virtual void Hover(bool hovering)
+        {
+
+        }
+
         public virtual void Release()
         {
         }

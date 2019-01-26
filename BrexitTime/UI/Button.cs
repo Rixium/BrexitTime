@@ -12,8 +12,9 @@ namespace BrexitTime.UI
         private readonly Vector2 _textSize;
         private readonly Texture2D _texture;
         private readonly Texture2D _pressedTexture;
-        private bool pressed;
-        private float pressedTimer;
+        private bool _pressed;
+        private bool _hovering;
+        private float _pressedTimer;
 
         public Button(Texture2D texture, Texture2D pressedTexture, SpriteFont font, string text,
             Vector2 position, int scale,
@@ -41,19 +42,24 @@ namespace BrexitTime.UI
 
         public override void Update(float deltaTime)
         {
-            if (!pressed) return;
+            if (!_pressed) return;
 
-            pressedTimer -= deltaTime;
+            _pressedTimer -= deltaTime;
 
-            if (pressedTimer <= 0)
-                pressed = false;
+            if (_pressedTimer <= 0)
+                _pressed = false;
+        }
+
+        public override void Hover(bool hovering)
+        {
+            _hovering = hovering;
         }
 
         public override void Click()
         {
             OnElementClick?.Invoke(this);
-            pressedTimer = 0.1f;
-            pressed = true;
+            _pressedTimer = 0.1f;
+            _pressed = true;
         }
 
         public override void Release()
@@ -62,17 +68,20 @@ namespace BrexitTime.UI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (pressed)
-            {
-                spriteBatch.Draw(_pressedTexture, Bounds, Color.White);
+            var color = Color.White * 0.5f;
+            if (_hovering) color = Color.White;
 
-                spriteBatch.DrawString(_font, _text, new Vector2(TextPosition.X, TextPosition.Y + 5), Color.White);
+            if (_pressed)
+            {
+                spriteBatch.Draw(_pressedTexture, Bounds, color);
+
+                spriteBatch.DrawString(_font, _text, new Vector2(TextPosition.X, TextPosition.Y + 5), color);
             }
             else
             {
-                spriteBatch.Draw(_texture, Bounds, Color.White);
+                spriteBatch.Draw(_texture, Bounds, color);
 
-                spriteBatch.DrawString(_font, _text, TextPosition, Color.White);
+                spriteBatch.DrawString(_font, _text, TextPosition, color);
             }
             
         }

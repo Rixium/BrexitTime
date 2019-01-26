@@ -13,6 +13,7 @@ namespace BrexitTime.Managers
                 0.1f; // Represents how long the mouse button needs to be held down to trigger an onHold event.
 
         private readonly Dictionary<UIElement, Action> _elementMap = new Dictionary<UIElement, Action>();
+        private readonly Dictionary<InputCommand, Action<InputCommand>> _buttonMap = new Dictionary<InputCommand, Action<InputCommand>>();
 
         private KeyboardState _currentKeyState;
         private MouseState _currentMouseState;
@@ -61,6 +62,19 @@ namespace BrexitTime.Managers
         {
             ManageMouse(deltaTime);
             ManageKeyboard();
+            ManageGamepad();
+        }
+
+        private void ManageGamepad()
+        {
+            foreach (var button in _buttonMap)
+            {
+                var gamepad = GamePad.GetState(button.Key.GamePadNumber);
+                if (gamepad.IsButtonDown(button.Key.Button))
+                {
+                    button.Value?.Invoke(button.Key);
+                }
+            }
         }
 
         private void ManageKeyboard()
@@ -187,6 +201,16 @@ namespace BrexitTime.Managers
             public Action<Keys> OnKeyDown;
             public Action<Keys> OnKeyPress;
             public Action<Keys> OnKeyUp;
+        }
+
+        public void RegisterGamePadButton(InputCommand button, Action<InputCommand> clickSelected)
+        {
+            if (_buttonMap.ContainsKey(button))
+            {
+                _buttonMap[button] += clickSelected;
+                return;
+            }
+            _buttonMap.Add(button, clickSelected);
         }
     }
 }

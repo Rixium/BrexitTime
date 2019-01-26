@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using BrexitTime.Enums;
 using BrexitTime.Games;
+using BrexitTime.UI;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -36,6 +38,8 @@ namespace BrexitTime
         public Texture2D Stage { get; set; }
         public SoundEffect Click { get; set; }
 
+        public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
+
         public void Load()
         {
             // Load all assets in here.
@@ -54,6 +58,11 @@ namespace BrexitTime
             Shadow = Load<Texture2D>("gameobjects/shadow");
             Stage = Load<Texture2D>("Background/stage");
             Click = Load<SoundEffect>("SoundEffects/click");
+
+            GamepadButtons.Add(ButtonType.X, Load<Texture2D>("UI/Xbox_X"));
+            GamepadButtons.Add(ButtonType.B, Load<Texture2D>("UI/Xbox_B"));
+            GamepadButtons.Add(ButtonType.Y, Load<Texture2D>("UI/Xbox_Y"));
+            GamepadButtons.Add(ButtonType.A, Load<Texture2D>("UI/Xbox_A"));
 
             LoadCharacterData();
         }

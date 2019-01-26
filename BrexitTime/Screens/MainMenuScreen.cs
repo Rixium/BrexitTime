@@ -4,6 +4,7 @@ using BrexitTime.Enums;
 using BrexitTime.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace BrexitTime.Screens
 {
@@ -14,6 +15,8 @@ namespace BrexitTime.Screens
 
         private readonly List<UIElement> _uiElements;
         private Vector2 _creditsPosition;
+
+        private int _hoverButton;
         private Logo _logo;
 
         public MainMenuScreen()
@@ -29,9 +32,11 @@ namespace BrexitTime.Screens
             var position =
                 new Vector2(ScreenSettings.ScreenCenter.X,
                     ContentChest.Logo.Height + Padding * 2); // Button position center of screen.
-            var startButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed, ContentChest.MainFont, "Start", position, 2,
+            var startButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed,
+                ContentChest.MainFont, "Start", position, 2,
                 Alignment.CENTER);
-            var quitButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed, ContentChest.MainFont, "Exit",
+            var quitButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed,
+                ContentChest.MainFont, "Exit",
                 new Vector2(position.X, startButton.Bottom.Y + Padding), 2,
                 Alignment.CENTER);
 
@@ -39,11 +44,16 @@ namespace BrexitTime.Screens
             _uiElements.Add(quitButton);
 
             startButton.OnElementClick += AudioManager.OnButtonClick;
+            startButton.OnElementClick += OnStartClicked;
             quitButton.OnElementClick += AudioManager.OnButtonClick;
 
-            // Register all of the UI elements so that our input manager knows if they've been clicked.
-            InputManager.RegisterUIElement(OnStartClicked, startButton);
-            InputManager.RegisterUIElement(OnQuitClicked, quitButton);
+            var pad1A = new InputCommand(0, Buttons.A);
+            var pad1Down = new InputCommand(0, Buttons.LeftThumbstickDown);
+            var pad1Up = new InputCommand(0, Buttons.LeftThumbstickUp);
+
+            InputManager.RegisterGamePadButton(pad1A, ClickSelected);
+            InputManager.RegisterGamePadButton(pad1Down, ChangeButton);
+            InputManager.RegisterGamePadButton(pad1Up, ChangeButton);
 
             var _logoPosition = new Vector2(ScreenSettings.ScreenCenter.X - ContentChest.Logo.Width / 2, Padding);
             _logo = new Logo(ContentChest.Logo, _logoPosition);
@@ -52,21 +62,44 @@ namespace BrexitTime.Screens
                 ScreenSettings.Height - textbounds.Y - Padding);
         }
 
+        private void ChangeButton(InputCommand obj)
+        {
+            switch (obj.Button)
+            {
+                case Buttons.LeftThumbstickUp:
+                    _hoverButton--;
+                    break;
+                case Buttons.LeftThumbstickDown:
+                    _hoverButton++;
+                    break;
+            }
+
+            _hoverButton = MathHelper.Clamp(_hoverButton, 0, _uiElements.Count - 1);
+        }
+
+        private void OnStartClicked(UIElement obj)
+        {
+            ChangeScreen(new CharacterSelectScreen());
+        }
+
+        private void ClickSelected(InputCommand obj)
+        {
+            _uiElements[_hoverButton].Click();
+        }
+
         private void OnQuitClicked()
         {
             Quit();
         }
 
-        private void OnStartClicked()
-        {
-            ChangeScreen(new CharacterSelectScreen());
-        }
-
         public override void Update(float deltaTime)
         {
             if (ScreenState == ScreenState.Active)
-            {
-            }
+                for (var i = 0; i < _uiElements.Count; i++)
+                    if (i == _hoverButton)
+                        _uiElements[i].Hover(true);
+                    else
+                        _uiElements[i].Hover(false);
 
 
             foreach (var elem in _uiElements)
