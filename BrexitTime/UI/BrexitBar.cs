@@ -1,4 +1,5 @@
-﻿using BrexitTime.Constants;
+﻿using System;
+using BrexitTime.Constants;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,6 +13,8 @@ namespace BrexitTime.UI
 
         public float Brexiteers;
         public Texture2D Pixel;
+        private float NewPercentage;
+        private float Percentage;
 
         public Vector2 Position;
         public float Remainers;
@@ -28,11 +31,27 @@ namespace BrexitTime.UI
         public void SetBrexit(float brexitBias)
         {
             Brexiteers = brexitBias;
+            NewPercentage = Remainers / (Brexiteers + Remainers);
         }
 
         public void SetRemain(float remainBias)
         {
             Remainers = remainBias;
+            NewPercentage = Remainers / (Brexiteers + Remainers);
+        }
+
+        public void Update(float deltaTime)
+        {
+
+            if (Math.Abs(NewPercentage - Percentage) < 0.01f)
+            {
+                Percentage = NewPercentage;
+                return;
+            }
+
+            if (NewPercentage < Percentage)
+                Percentage -= deltaTime * 0.4f;
+            else Percentage += deltaTime * 0.4f;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -42,8 +61,8 @@ namespace BrexitTime.UI
                 Border.Height - 4);
             spriteBatch.Draw(_leaveBar, r, Color.Red);
 
-            var width = Remainers / (Brexiteers + Remainers);
-            spriteBatch.Draw(_remainBar, new Rectangle(r.X, r.Y, (int)(r.Width * width), r.Height), Color.Blue);
+            
+            spriteBatch.Draw(_remainBar, new Rectangle(r.X, r.Y, (int)(r.Width * Percentage), r.Height), Color.Blue);
         }
     }
 }

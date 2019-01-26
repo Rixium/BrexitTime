@@ -65,6 +65,7 @@ namespace BrexitTime.Screens
             _audience.OnDecision += OnDecision;
 
             MediaPlayer.IsRepeating = false;
+            MediaPlayer.Volume = 0.1f;
             MediaPlayer.Play(ContentChest.MainSong);
             gameTime = (float) ContentChest.MainSong.Duration.TotalSeconds;
             base.Initialise();
@@ -127,6 +128,7 @@ namespace BrexitTime.Screens
 
             _brexitBar.SetBrexit(_audience.Brexiteers);
             _brexitBar.SetRemain(_audience.Remainers);
+            _brexitBar.Update(deltaTime);
 
             foreach (var t in new List<FloatyText>(FloatyText))
             {
