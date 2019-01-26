@@ -48,7 +48,7 @@ namespace BrexitTime
         public List<SoundEffect> Remains { get; set; } = new List<SoundEffect>();
         public List<SoundEffect> Leaves { get; set; } = new List<SoundEffect>();
 
-        public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
+        public Dictionary<ButtonType, Dictionary<string, Texture2D>> GamepadButtons { get; set; } = new Dictionary<ButtonType, Dictionary<string, Texture2D>>();
         public Dictionary<string, Texture2D> Characters { get; set; } = new Dictionary<string, Texture2D>();
         public Dictionary<string, Texture2D> Portraits { get; set; } = new Dictionary<string, Texture2D>();
         public Dictionary<string, SoundEffect> SelectionClips { get; set; } = new Dictionary<string, SoundEffect>();
@@ -99,10 +99,50 @@ namespace BrexitTime
             }
             PortraitBackground = Load<Texture2D>("Portraits/Portrait_Background");
 
-            GamepadButtons.Add(ButtonType.X, Load<Texture2D>("UI/Xbox_X"));
-            GamepadButtons.Add(ButtonType.B, Load<Texture2D>("UI/Xbox_B"));
-            GamepadButtons.Add(ButtonType.Y, Load<Texture2D>("UI/Xbox_Y"));
-            GamepadButtons.Add(ButtonType.A, Load<Texture2D>("UI/Xbox_A"));
+            var x = new Dictionary<string, Texture2D>
+            {
+                {
+                    "XInput Controller", Load<Texture2D>("UI/Xbox_X")
+                },
+                {
+                    "PS4 Controller", Load<Texture2D>("UI/PS4_Square")
+                }
+            };
+
+            var a = new Dictionary<string, Texture2D>
+            {
+                {
+                    "XInput Controller", Load<Texture2D>("UI/Xbox_A")
+                },
+                {
+                    "PS4 Controller", Load<Texture2D>("UI/PS4_Cross")
+                }
+            };
+
+            var b = new Dictionary<string, Texture2D>
+            {
+                {
+                    "XInput Controller", Load<Texture2D>("UI/Xbox_B")
+                },
+                {
+                    "PS4 Controller", Load<Texture2D>("UI/PS4_Circle")
+                }
+            };
+
+            var y = new Dictionary<string, Texture2D>
+            {
+                {
+                    "XInput Controller", Load<Texture2D>("UI/Xbox_Y")
+                },
+                {
+                    "PS4 Controller", Load<Texture2D>("UI/PS4_Triangle")
+                }
+            };
+
+            GamepadButtons.Add(ButtonType.X, x);
+            GamepadButtons.Add(ButtonType.B, b);
+            GamepadButtons.Add(ButtonType.Y, y);
+            GamepadButtons.Add(ButtonType.A, a);
 
             Characters.Add("Jeremy", Load<Texture2D>("Characters/Jeremy"));
             Characters.Add("Boris", Load<Texture2D>("Characters/Boris"));

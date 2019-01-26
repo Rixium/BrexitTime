@@ -1,4 +1,5 @@
-﻿using BrexitTime.Constants;
+﻿using System;
+using BrexitTime.Constants;
 using BrexitTime.Enums;
 using BrexitTime.Managers;
 using BrexitTime.Screens;
@@ -22,7 +23,7 @@ namespace BrexitTime
                 PreferredBackBufferWidth = 1280,
                 PreferredBackBufferHeight = 720
             };
-
+            
             Content.RootDirectory = "Content";
             _contentChest =
                 new ContentChest(
@@ -43,6 +44,7 @@ namespace BrexitTime
             Window.Title = "Ye Olde' Country We Call Home";
             _screenManager = new ScreenManager(this, _contentChest); // Hold the state of the screens.
             ScreenSettings.Initialise(Graphics); // We can store some constants here that we can use throughout.
+            Graphics.ApplyChanges();
             base.Initialize();
         }
 
@@ -64,6 +66,8 @@ namespace BrexitTime
             var deltaTime =
                 gameTime.ElapsedGameTime.Milliseconds / 1000.0f; // Get milliseconds passed since last frame.
             _screenManager.Update(deltaTime); // Update all the active screens.
+
+            Console.WriteLine(GamePad.GetCapabilities(1).DisplayName);
             base.Update(gameTime);
         }
 

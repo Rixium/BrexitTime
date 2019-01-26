@@ -52,7 +52,7 @@ namespace BrexitTime.Screens
 
         private void DrawButtons(SpriteBatch spriteBatch)
         {
-            var b1 = ContentChest.GamepadButtons[ButtonType.A];
+            var b1 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(0).DisplayName];
             var b1Pos = new Rectangle(ScreenSettings.Width - b1.Width - 20, ScreenSettings.Height - b1.Height - 20,
                 b1.Width, b1.Height);
 

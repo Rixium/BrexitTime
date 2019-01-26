@@ -11,7 +11,7 @@ namespace BrexitTime.Managers
 {
     public class StatementManager
     {
-        private readonly float _activateAnswerMaxTime = 1.0f;
+        private readonly float _activateAnswerMaxTime = 0.5f;
         private readonly Character _c1;
         private readonly Character _c2;
         private readonly ContentChest _contentChest;
@@ -136,8 +136,8 @@ namespace BrexitTime.Managers
             {
                 var answer = _activeStatement.Answers[i];
                 var answerSize = _contentChest.MainFont.MeasureString(answer.Text);
-                var b = _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]];
-                var b2 = _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]];
+                var b = _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]][GamePad.GetCapabilities(0).DisplayName];
+                var b2 = _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]][GamePad.GetCapabilities(1).DisplayName];
 
                 var textPos = new Vector2(ScreenSettings.ScreenCenter.X - answerSize.X / 2,
                     ScreenSettings.ScreenCenter.Y - 4 * (30 + answerSize.Y) + i * (answerSize.Y + 30));

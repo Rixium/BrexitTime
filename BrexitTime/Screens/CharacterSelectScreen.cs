@@ -314,24 +314,47 @@ namespace BrexitTime.Screens
 
         private void DrawButtons(SpriteBatch spriteBatch)
         {
-            var b1 = ContentChest.GamepadButtons[ButtonType.A];
-            var b1Pos = new Rectangle(ScreenSettings.Width / 2 - b1.Width / 2, ScreenSettings.Height - b1.Height - 20, b1.Width, b1.Height);
-
+            var showOne = false;
+            var b1 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(0).DisplayName];
+            var b2 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(1).DisplayName];
+            
+            
+            var b1Pos = new Rectangle(ScreenSettings.Width / 2 - b1.Width / 2 - b1.Width - 10, ScreenSettings.Height - b1.Height - 20, b1.Width, b1.Height);
+            var b2Pos = new Rectangle(ScreenSettings.Width / 2 - b2.Width / 2 + b2.Width + 10, ScreenSettings.Height - b2.Height - 20, b2.Width, b2.Height);
 
             var text = "Select Character";
 
             if (c1LockedIn && c2LockedIn)
+            {
                 text = "Start Game";
+                showOne = true;
+            }
+
+
+            if (GamePad.GetCapabilities(0).DisplayName == GamePad.GetCapabilities(1).DisplayName || showOne)
+            {
+                b1Pos = new Rectangle(ScreenSettings.Width / 2 - b1.Width / 2, ScreenSettings.Height - b1.Height - 20, b1.Width, b1.Height);
+                showOne = true;
+            }
+
 
             var textSize = ContentChest.MainFont.MeasureString(text);
-            spriteBatch.DrawString(ContentChest.MainFont, text, new Vector2(b1Pos.X + b1.Width / 2 - textSize.X / 2, b1Pos.Y - textSize.Y - 5), Color.White);
+            spriteBatch.DrawString(ContentChest.MainFont, text, new Vector2(ScreenSettings.Width / 2 - textSize.X / 2, b1Pos.Y - textSize.Y - 5), Color.White);
 
             if (Math.Abs(Math.Floor(pulseTimer) % 2) == 0)
             {
-                b1Pos = new Rectangle(ScreenSettings.Width / 2 - (b1.Width - 10) / 2, ScreenSettings.Height - (b1.Height) - 20, b1.Width - 10, b1.Height - 10);
+                if (showOne)
+                {
+                    b1Pos = new Rectangle(ScreenSettings.Width / 2 - ((b1.Width - 10) / 2), ScreenSettings.Height - (b1.Height) - 20, b1.Width - 10, b1.Height - 10);
+                } else b1Pos = new Rectangle(ScreenSettings.Width / 2 - (b1.Width / 2) - b1.Width - 5, ScreenSettings.Height - (b1.Height) - 20, b1.Width - 10, b1.Height - 10);
+                b2Pos = new Rectangle(ScreenSettings.Width / 2 - (b2.Width / 2) + b2.Width + 5, ScreenSettings.Height - (b2.Height) - 20, b2.Width - 10, b2.Height - 10);
             }
 
-            spriteBatch.Draw(b1, b1Pos, Color.White);
+            if(!c1LockedIn || showOne)
+                spriteBatch.Draw(b1, b1Pos, Color.White);
+
+            if(!showOne && !c2LockedIn)
+                spriteBatch.Draw(b2, b2Pos, Color.White);
         }
 
     }
