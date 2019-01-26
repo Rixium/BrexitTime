@@ -52,7 +52,7 @@ namespace BrexitTime
             _contentChest.Load(); // Load all the required resources here.            
 
 
-            _screenManager.AddScreen(new ResultScreen(Bias.Remain));
+            _screenManager.AddScreen(new SplashScreen());
         }
 
         protected override void UnloadContent()

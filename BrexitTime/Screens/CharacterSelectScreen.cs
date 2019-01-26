@@ -37,9 +37,9 @@ namespace BrexitTime.Screens
             var c1 = ContentChest.CharacterData[0];
             var c2 = ContentChest.CharacterData[2];
 
-            var c1Position = new Rectangle(100, ScreenSettings.Height / 2 - ContentChest.Characters[c1.Name].Height / 2,
+            var c1Position = new Rectangle(200, ScreenSettings.Height / 2 - ContentChest.Characters[c1.Name].Height / 2,
                 ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
-            var c2Position = new Rectangle(ScreenSettings.Width - 100 - ContentChest.Characters[c1.Name].Width / 2,
+            var c2Position = new Rectangle(ScreenSettings.Width - 200 - ContentChest.Characters[c1.Name].Width / 2,
                 c1Position.Y, ContentChest.Characters[c1.Name].Width, ContentChest.Characters[c1.Name].Height);
 
             character1 = new Character(ContentChest.Characters[c1.Name], ContentChest.MainFont, c1Position, c1);
@@ -279,21 +279,21 @@ namespace BrexitTime.Screens
                 new Rectangle(0, ScreenSettings.Height - ContentChest.Stage.Height / 2, 1280,
                     ContentChest.Stage.Height), Color.White);
             spriteBatch.Draw(ContentChest.Shadow,
-                new Rectangle(100, ScreenSettings.Height / 2 - 65, ContentChest.EUPodium.Width * 2,
+                new Rectangle(200, ScreenSettings.Height / 2 - 65, ContentChest.EUPodium.Width * 2,
                     ContentChest.EUPodium.Height * 2), Color.Black * 0.8f);
             spriteBatch.Draw(ContentChest.Shadow,
-                new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2,
+                new Rectangle(ScreenSettings.Width - 200 - ContentChest.UKPodium.Width * 2,
                     ScreenSettings.Height / 2 - 65, ContentChest.UKPodium.Width * 2, ContentChest.UKPodium.Height * 2),
                 Color.Black * 0.8f);
 
-            character1.Draw(spriteBatch);
-            character2.Draw(spriteBatch);
+            character1.Draw(spriteBatch, true);
+            character2.Draw(spriteBatch, true);
 
             spriteBatch.Draw(ContentChest.EUPodium,
-                new Rectangle(100, ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2,
+                new Rectangle(200, ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2,
                     ContentChest.EUPodium.Width * 2, ContentChest.EUPodium.Height * 2), Color.White);
             spriteBatch.Draw(ContentChest.UKPodium,
-                new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2,
+                new Rectangle(ScreenSettings.Width - 200 - ContentChest.UKPodium.Width * 2,
                     ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.UKPodium.Width * 2,
                     ContentChest.UKPodium.Height * 2), Color.White);
 

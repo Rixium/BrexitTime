@@ -73,6 +73,7 @@
     <Compile Include="UI\BrexitBar.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\CharacterButton.cs" />
+    <Compile Include="UI\FloatyText.cs" />
     <Compile Include="UI\Logo.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>

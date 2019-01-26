@@ -1,4 +1,6 @@
-﻿using BrexitTime.Constants;
+﻿using System;
+using System.Collections.Generic;
+using BrexitTime.Constants;
 using BrexitTime.Enums;
 using BrexitTime.Games;
 using BrexitTime.Managers;
@@ -21,6 +23,8 @@ namespace BrexitTime.Screens
         private BrexitBar _brexitBar;
         private StatementManager _statementManager;
         private bool debug;
+
+        private List<FloatyText> FloatyText = new List<FloatyText>();
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
@@ -47,6 +51,7 @@ namespace BrexitTime.Screens
 
             _statementManager = new StatementManager(ContentChest, _playerOne, _playerTwo);
             _statementManager.OnStatementEnded += OnStatementEnded;
+            _statementManager.OnStatementSelect += OnStatementSelect;
 
             _brexitBar = new BrexitBar(ContentChest.BarBackground, ContentChest.LeaveBar, ContentChest.RemainBar);
 
@@ -55,6 +60,15 @@ namespace BrexitTime.Screens
 
             _audience.OnDecision += OnDecision;
             base.Initialise();
+        }
+
+        private void OnStatementSelect(Character c, Answer ans)
+        {
+            var textSize = ContentChest.MainFont.MeasureString(ans.Text);
+            var position = c.RawTextPosition;
+            position.X -= textSize.X / 2;
+            position.Y -= 50;
+            FloatyText.Add(new FloatyText(ans.Text, position, ContentChest.Pixel, ContentChest.MainFont));
         }
 
         private void OnDecision(Bias obj)
@@ -98,6 +112,13 @@ namespace BrexitTime.Screens
             _brexitBar.SetBrexit(_audience.Brexiteers);
             _brexitBar.SetRemain(_audience.Remainers);
 
+            foreach (var t in new List<FloatyText>(FloatyText))
+            {
+                t.Update(deltaTime);
+                if (t.Finished)
+                    FloatyText.Remove(t);
+            }
+
             if (ScreenState == ScreenState.Active) _statementManager.Update(deltaTime);
 
             base.Update(deltaTime);
@@ -113,10 +134,10 @@ namespace BrexitTime.Screens
                 new Rectangle(0, ScreenSettings.Height - ContentChest.Stage.Height / 2, 1280,
                     ContentChest.Stage.Height), Color.White);
             spriteBatch.Draw(ContentChest.Shadow,
-                new Rectangle(100, ScreenSettings.Height / 2 - 65, ContentChest.EUPodium.Width * 2,
+                new Rectangle(200, ScreenSettings.Height / 2 - 65, ContentChest.EUPodium.Width * 2,
                     ContentChest.EUPodium.Height * 2), Color.Black * 0.8f);
             spriteBatch.Draw(ContentChest.Shadow,
-                new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2,
+                new Rectangle(ScreenSettings.Width - 200 - ContentChest.UKPodium.Width * 2,
                     ScreenSettings.Height / 2 - 65, ContentChest.UKPodium.Width * 2, ContentChest.UKPodium.Height * 2),
                 Color.Black * 0.8f);
 
@@ -124,10 +145,10 @@ namespace BrexitTime.Screens
             _playerTwo.Draw(spriteBatch);
 
             spriteBatch.Draw(ContentChest.EUPodium,
-                new Rectangle(100, ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2,
+                new Rectangle(200, ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2,
                     ContentChest.EUPodium.Width * 2, ContentChest.EUPodium.Height * 2), Color.White);
             spriteBatch.Draw(ContentChest.UKPodium,
-                new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2,
+                new Rectangle(ScreenSettings.Width - 200 - ContentChest.UKPodium.Width * 2,
                     ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.UKPodium.Width * 2,
                     ContentChest.UKPodium.Height * 2), Color.White);
 
@@ -141,6 +162,9 @@ namespace BrexitTime.Screens
                 spriteBatch.DrawString(ContentChest.MainFont, $"LEAVE: {_audience.Brexiteers}", new Vector2(10, 70),
                     Color.White);
             }
+
+            foreach(var t in new List<FloatyText>(FloatyText))
+                t.Draw(spriteBatch);
 
             _statementManager.Draw(spriteBatch);
             _brexitBar.Draw(spriteBatch);

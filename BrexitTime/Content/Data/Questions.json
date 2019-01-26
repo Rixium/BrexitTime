@@ -4,20 +4,20 @@
     "Answers": [
       {
         "Text": "Better Defence Against the Infidels",
-        "BiasModifier": -0.05
+        "BiasModifier": -0.2
       },
       {
         "Text": "More Workers for our businesses!",
-        "BiasModifier": 0.01
+        "BiasModifier": 0.1
 
       },
       {
         "Text": "Less Opportunity For Travel",
-        "BiasModifier": -0.01
+        "BiasModifier": -0.1
       },
       {
         "Text": "Trade Opportunities with our Friends",
-        "BiasModifier": 0.05
+        "BiasModifier": 0.2
       }
     ]
   },
@@ -26,20 +26,20 @@
     "Answers": [
       {
         "Text": "More Aldis! More Caffeine Shampoo!",
-        "BiasModifier": 0.05
+        "BiasModifier": 0.2
       },
       {
         "Text": "Tommy Robinson!",
-        "BiasModifier": -0.05
+        "BiasModifier": -0.2
 
       },
       {
         "Text": "Reduce the import emissions!",
-        "BiasModifier": -0.01
+        "BiasModifier": -0.1
       },
       {
         "Text": "Build less Guns!",
-        "BiasModifier": 0.01
+        "BiasModifier": 0.1
       }
     ]
   }

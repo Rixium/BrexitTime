@@ -27,6 +27,7 @@ namespace BrexitTime.Managers
         private int currLength;
         private float lastClick;
         public Action<Answer, Answer> OnStatementEnded;
+        public Action<Character, Answer> OnStatementSelect;
 
         public Answer SelectedP1;
         public Answer SelectedP2;
@@ -195,6 +196,7 @@ namespace BrexitTime.Managers
             if (answer == null) return;
 
             SelectedP2 = answer;
+            OnStatementSelect?.Invoke(_c2, SelectedP2);
             answer.UsedBy = Bias.Leave;
             _contentChest.AnswerSelect.Play();
         }
@@ -208,6 +210,7 @@ namespace BrexitTime.Managers
             answer.UsedBy = Bias.Remain;
             _contentChest.AnswerSelect.Play();
             SelectedP1 = answer;
+            OnStatementSelect?.Invoke(_c1, SelectedP1);
         }
 
         private ButtonType ConvertButton(Buttons buttons)
