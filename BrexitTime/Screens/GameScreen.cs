@@ -31,9 +31,27 @@ namespace BrexitTime.Screens
         public override void Initialise()
         {
             InputManager.RegisterOnKeyPress(Keys.F1, ToggleDebug);
+
+
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.A), ButtonDown);
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.B), ButtonDown);
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.X), ButtonDown);
+            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.Y), ButtonDown);
+
+            InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.A), ButtonDown);
+            InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.B), ButtonDown);
+            InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.X), ButtonDown);
+            InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.Y), ButtonDown);
+
             _statementManager = new StatementManager(ContentChest);
             base.Initialise();
         }
+
+        private void ButtonDown(InputCommand obj)
+        {
+            _statementManager.MakeSelection(obj.GamePadNumber, obj.Button);
+        }
+        
 
         private void ToggleDebug(Keys obj)
         {
