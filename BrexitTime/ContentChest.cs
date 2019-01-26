@@ -43,6 +43,7 @@ namespace BrexitTime
         public SoundEffect Start { get; set; }
         public SoundEffect Audience { get; set; }
         public SoundEffect Answer { get; set; }
+        public SoundEffect AnswerSelect { get; set; }
 
         public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
         public Dictionary<string, Texture2D> Characters { get; set; } = new Dictionary<string, Texture2D>();
@@ -50,6 +51,7 @@ namespace BrexitTime
         public Dictionary<string, SoundEffect> SelectionClips { get; set; } = new Dictionary<string, SoundEffect>();
         public List<Texture2D> AudiencePeople = new List<Texture2D>();
         public Texture2D PortraitBackground { get; set; }
+        public SpriteFont QuestionFont { get; set; }
 
         public void Load()
         {
@@ -61,6 +63,7 @@ namespace BrexitTime
             Pixel = Load<Texture2D>("pixel");
             MainFont = Load<SpriteFont>("Fonts/MainFont");
             TitleFont = Load<SpriteFont>("Fonts/TitleFont");
+            QuestionFont = Load<SpriteFont>("Fonts/QuestionFont");
             GameBackground = Load<Texture2D>("Background/background");
             MainSong = Load<Song>("music/mainsong");
             UKPodium = Load<Texture2D>("gameobjects/podium_uk");
@@ -72,6 +75,7 @@ namespace BrexitTime
             Click = Load<SoundEffect>("SoundEffects/click");
             Select = Load<SoundEffect>("SoundEffects/select");
             Answer = Load<SoundEffect>("SoundEffects/answer");
+            AnswerSelect = Load<SoundEffect>("SoundEffects/answerSelect");
             Start = Load<SoundEffect>("SoundEffects/start");
             Audience = Load<SoundEffect>("SoundEffects/audience");
             AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_1"));
