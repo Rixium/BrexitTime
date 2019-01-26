@@ -1,8 +1,8 @@
-﻿using System;
-using BrexitTime.Constants;
+﻿using BrexitTime.Constants;
 using BrexitTime.Enums;
 using BrexitTime.Games;
 using BrexitTime.Managers;
+using BrexitTime.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -14,18 +14,19 @@ namespace BrexitTime.Screens
         private readonly Audience _audience;
         private readonly Character _playerOne;
         private readonly Character _playerTwo;
-        private readonly Random _random;
+        private readonly System.Random _random;
 
         private Statement _activeStatement;
         private StatementManager _statementManager;
         private bool debug;
+        private BrexitBar _brexitBar;
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
             _playerOne = playerOne;
             _playerTwo = playerTwo;
             _audience = audience;
-            _random = new Random();
+            _random = new System.Random();
         }
 
         public override void Initialise()
@@ -45,15 +46,37 @@ namespace BrexitTime.Screens
 
             _statementManager = new StatementManager(ContentChest, _playerOne, _playerTwo);
             _statementManager.OnStatementEnded += OnStatementEnded;
+
+            _brexitBar = new BrexitBar(ContentChest.BarBackground, ContentChest.LeaveBar, ContentChest.RemainBar);
+
+            _brexitBar.SetBrexit(_audience.Brexiteers);
+            _brexitBar.SetRemain(_audience.Remainers);
+
+            _audience.OnDecision += OnDecision;
             base.Initialise();
+        }
+
+        private void OnDecision(Bias obj)
+        {
+            ChangeScreen(new ResultScreen(obj));
         }
 
         private void OnStatementEnded(Answer p1Answer, Answer p2Answer)
         {
             if (p1Answer != null)
-                _audience.Distribute(p1Answer.BiasModifier);
+                _audience.Distribute(CalculateBias(_playerOne, p1Answer.BiasModifier));
             if (p2Answer != null)
-                _audience.Distribute(p2Answer.BiasModifier);
+                _audience.Distribute(CalculateBias(_playerTwo, p2Answer.BiasModifier));
+        }
+
+        private float CalculateBias(Character p, float bias)
+        {
+            if (bias < 0 && p.CharacterData.Bias == Bias.Remain)
+                return bias / 2.0f;
+            if (bias > 0 && p.CharacterData.Bias == Bias.Leave)
+                return bias / 2.0f;
+
+            return bias;
         }
 
         private void ButtonDown(InputCommand obj)
@@ -71,6 +94,9 @@ namespace BrexitTime.Screens
         {
             _audience.Update(deltaTime);
 
+            _brexitBar.SetBrexit(_audience.Brexiteers);
+            _brexitBar.SetRemain(_audience.Remainers);
+            
             if (ScreenState == ScreenState.Active) _statementManager.Update(deltaTime);
 
             base.Update(deltaTime);
@@ -116,6 +142,7 @@ namespace BrexitTime.Screens
             }
 
             _statementManager.Draw(spriteBatch);
+            _brexitBar.Draw(spriteBatch);
 
             spriteBatch.End();
             base.Draw(spriteBatch);

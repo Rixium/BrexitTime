@@ -42,6 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Constants\Random.cs" />
     <Compile Include="Constants\ScreenSettings.cs" />
     <Compile Include="ContentChest.cs" />
     <Compile Include="Enums\Alignment.cs" />
@@ -66,8 +67,10 @@
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\IScreen.cs" />
     <Compile Include="Screens\MainMenuScreen.cs" />
+    <Compile Include="Screens\ResultScreen.cs" />
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\SplashScreen.cs" />
+    <Compile Include="UI\BrexitBar.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\CharacterButton.cs" />
     <Compile Include="UI\Logo.cs" />

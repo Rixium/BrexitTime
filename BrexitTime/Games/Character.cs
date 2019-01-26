@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BrexitTime.Constants;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace BrexitTime.Games
@@ -21,7 +22,7 @@ namespace BrexitTime.Games
         public Rectangle Position { get; set; }
 
         public Vector2 Center => new Vector2(Texture.Width / 2, 0);
-
+        
         public void Update(float deltaTime)
         {
         }
@@ -32,7 +33,8 @@ namespace BrexitTime.Games
 
             if (FacingLeft)
             {
-                spriteBatch.Draw(Texture, Position, null, Color.White, 0, Center, SpriteEffects.FlipHorizontally, 0);
+                spriteBatch.Draw(Texture, Position, null, Color.White, 0, Center, SpriteEffects.FlipHorizontally,
+                    0);
                 spriteBatch.DrawString(_font, CharacterData.Name,
                     new Vector2(Position.X - fontSize.X / 2, Position.Y - 5 - fontSize.Y), Color.White);
                 return;

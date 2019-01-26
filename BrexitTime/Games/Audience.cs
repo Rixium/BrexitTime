@@ -10,8 +10,10 @@ namespace BrexitTime.Games
     public class Audience
     {
         private readonly ContentChest _contentChest;
-        public Random _random = new Random();
+        public System.Random _random = new System.Random();
         public List<AudienceMember> Members = new List<AudienceMember>();
+
+        public Action<Bias> OnDecision;
 
         public int Rowdiness = 20;
 
@@ -53,6 +55,10 @@ namespace BrexitTime.Games
 
             Remainers--;
             Brexiteers++;
+
+
+            if(Brexiteers == 0 || Remainers == 0)
+                OnDecision?.Invoke(Brexiteers > Remainers ? Bias.Leave : Bias.Remain);
         }
 
         private void UpdateAudience(Bias memberBias)
@@ -69,10 +75,9 @@ namespace BrexitTime.Games
 
             Rowdiness = Math.Max(Brexiteers, Remainers);
 
-            if (Rowdiness >= Brexiteers + Remainers)
-            {
-                Rowdiness *= 2;
-            }
+            if (Rowdiness < Brexiteers + Remainers) return;
+
+            Rowdiness *= 2;
         }
 
         public void Update(float deltaTime)
@@ -114,4 +119,5 @@ namespace BrexitTime.Games
             foreach (var m in Members) m.UpdateBias(modifier);
         }
     }
+    
 }

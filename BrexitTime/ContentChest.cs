@@ -55,11 +55,16 @@ namespace BrexitTime
         public List<Texture2D> AudiencePeople = new List<Texture2D>();
         public Texture2D PortraitBackground { get; set; }
         public SpriteFont QuestionFont { get; set; }
+        public Texture2D BarBackground { get; set; }
+
+        public Texture2D LeaveBar { get; set; }
+        public Texture2D RemainBar { get; set; }
 
         public void Load()
         {
             // Load all assets in here.
             ButtonBackground = Load<Texture2D>("UI/button");
+            BarBackground = Load<Texture2D>("UI/brexitBar");
             ButtonBackground_Pressed = Load<Texture2D>("UI/button_pressed");
             Cursor = Load<Texture2D>("cursor");
             Splash = Load<Texture2D>("splash");
@@ -72,6 +77,8 @@ namespace BrexitTime
             UKPodium = Load<Texture2D>("gameobjects/podium_uk");
             EUPodium = Load<Texture2D>("gameobjects/podium_eu");
             Logo = Load<Texture2D>("logo");
+            LeaveBar = Load<Texture2D>("UI/leaveBar");
+            RemainBar = Load<Texture2D>("UI/remainBar");
             Shadow = Load<Texture2D>("gameobjects/shadow");
             Stage = Load<Texture2D>("Background/stage");
             StageBackground = Load<Texture2D>("Background/stage_background");

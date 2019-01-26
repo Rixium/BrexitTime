@@ -1,23 +1,45 @@
 ﻿[
   {
-    "Body": "I can promise, following negotiations, I will provide... ",
+    "Body": "I can promise, following negotiations, I will provide...",
     "Answers": [
       {
-        "Text":"More Weapons",
-        "BiasModifier":-0.2
+        "Text": "Better Defence Against the Infidels",
+        "BiasModifier": -0.05
       },
       {
-        "Text": "Less Movement Restrictions",
-        "BiasModifier":0.2
-      },
-      {
-        "Text": "Make me",
-        "BiasModifier":0
+        "Text": "More Workers for our businesses!",
+        "BiasModifier": 0.01
 
       },
       {
-        "Text": "Make me",
-        "BiasModifier":0
+        "Text": "Less Opportunity For Travel",
+        "BiasModifier": -0.01
+      },
+      {
+        "Text": "Trade Opportunities with our Friends",
+        "BiasModifier": 0.05
+      }
+    ]
+  },
+  {
+    "Body": "I can promise you, that if you follow me, We will...",
+    "Answers": [
+      {
+        "Text": "More Aldis! More Caffeine Shampoo!",
+        "BiasModifier": 0.05
+      },
+      {
+        "Text": "Tommy Robinson!",
+        "BiasModifier": -0.05
+
+      },
+      {
+        "Text": "Reduce the import emissions!",
+        "BiasModifier": -0.01
+      },
+      {
+        "Text": "Build less Guns!",
+        "BiasModifier": 0.01
       }
     ]
   }

@@ -15,7 +15,7 @@ namespace BrexitTime.Managers
         private readonly Character _c1;
         private readonly Character _c2;
         private readonly ContentChest _contentChest;
-        private readonly Random _random;
+        private readonly System.Random _random;
         private readonly float animateTime = 0.04f;
 
         private int _activeAnswers;
@@ -33,7 +33,7 @@ namespace BrexitTime.Managers
 
         public StatementManager(ContentChest contentChest, Character c1, Character c2)
         {
-            _random = new Random();
+            _random = new System.Random();
             _contentChest = contentChest;
             _c1 = c1;
             _c2 = c2;
@@ -182,7 +182,10 @@ namespace BrexitTime.Managers
             }
 
             if (SelectedP1 != null && SelectedP2 != null)
+            {
+                _activeStatement = null;
                 OnStatementEnded?.Invoke(SelectedP1, SelectedP2);
+            }
         }
 
         private void PlayerTwoSelect(Buttons buttons)

@@ -81,17 +81,41 @@ namespace BrexitTime.Screens
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.LeftThumbstickUp), PlayerTwoSelect);
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.LeftThumbstickDown), PlayerTwoSelect);
 
+            InputManager.RegisterOnKeyPress(Keys.W, PlayerOneSelect);
+            InputManager.RegisterOnKeyPress(Keys.S, PlayerOneSelect);
+            InputManager.RegisterOnKeyPress(Keys.Up, PlayerTwoSelect);
+            InputManager.RegisterOnKeyPress(Keys.Down, PlayerTwoSelect);
+
             InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.A), PlayerOneLockIn);
             InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.B), Back);
-            InputManager.RegisterGamePadButton(new InputCommand(0, Buttons.Start), StartGame);
             InputManager.RegisterGamePadButton(new InputCommand(1, Buttons.A), PlayerTwoLockIn);
+
+
+            InputManager.RegisterOnKeyPress(Keys.E, (k) => PlayerOneLockIn(null));
+            InputManager.RegisterOnKeyPress(Keys.Escape, (k) => Back(null));
+            InputManager.RegisterOnKeyPress(Keys.Enter, (k) => PlayerTwoLockIn(null));
 
             soundEffect = ContentChest.Audience.CreateInstance();
             soundEffect.IsLooped = true;
             soundEffect.Play();
 
             audience = new Audience(ContentChest);
+            
             base.Initialise();
+        }
+        
+        private void PlayerTwoSelect(Keys obj)
+        {
+            if (obj == Keys.Up)
+                PlayerTwoSelect(new InputCommand(1, Buttons.LeftThumbstickUp));
+            else PlayerTwoSelect(new InputCommand(1, Buttons.LeftThumbstickDown));
+        }
+
+        private void PlayerOneSelect(Keys obj)
+        {
+            if(obj == Keys.W)
+                PlayerOneSelect(new InputCommand(0, Buttons.LeftThumbstickUp));
+            else PlayerOneSelect(new InputCommand(0, Buttons.LeftThumbstickDown));
         }
 
         private void Back(InputCommand obj)
