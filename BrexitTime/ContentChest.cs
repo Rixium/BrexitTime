@@ -100,14 +100,17 @@ namespace BrexitTime
             Characters.Add("Jeremy", Load<Texture2D>("Characters/Jeremy"));
             Characters.Add("Boris", Load<Texture2D>("Characters/Boris"));
             Characters.Add("Theresa", Load<Texture2D>("Characters/Theresa"));
+            Characters.Add("Diane", Load<Texture2D>("Characters/Diane"));
 
             SelectionClips.Add("Jeremy", Load<SoundEffect>("SoundEffects/Selections/Jeremy"));
             SelectionClips.Add("Boris", Load<SoundEffect>("SoundEffects/Selections/Boris"));
             SelectionClips.Add("Theresa", Load<SoundEffect>("SoundEffects/Selections/Theresa"));
+            SelectionClips.Add("Diane", Load<SoundEffect>("SoundEffects/Selections/Theresa"));
 
             Portraits.Add("Jeremy", Load<Texture2D>("Portraits/Jeremy_Portrait"));
             Portraits.Add("Boris", Load<Texture2D>("Portraits/Boris_Portrait"));
             Portraits.Add("Theresa", Load<Texture2D>("Portraits/Theresa_Portrait"));
+            Portraits.Add("Diane", Load<Texture2D>("Portraits/Diane_Portrait"));
             LoadCharacterData();
             LoadStatements();
         }

@@ -11,14 +11,14 @@ namespace BrexitTime.Screens
 {
     public class GameScreen : Screen
     {
+        private readonly Audience _audience;
         private readonly Character _playerOne;
         private readonly Character _playerTwo;
-        private readonly Audience _audience;
         private readonly Random _random;
-        private bool debug;
 
         private Statement _activeStatement;
         private StatementManager _statementManager;
+        private bool debug;
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
@@ -50,9 +50,9 @@ namespace BrexitTime.Screens
 
         private void OnStatementEnded(Answer p1Answer, Answer p2Answer)
         {
-            if(p1Answer != null)
+            if (p1Answer != null)
                 _audience.Distribute(p1Answer.BiasModifier);
-            if(p2Answer != null)
+            if (p2Answer != null)
                 _audience.Distribute(p2Answer.BiasModifier);
         }
 
@@ -60,7 +60,7 @@ namespace BrexitTime.Screens
         {
             _statementManager.MakeSelection(obj.GamePadNumber, obj.Button);
         }
-        
+
 
         private void ToggleDebug(Keys obj)
         {
@@ -71,19 +71,17 @@ namespace BrexitTime.Screens
         {
             _audience.Update(deltaTime);
 
-            if (ScreenState == ScreenState.Active)
-            {
-                _statementManager.Update(deltaTime);
-            }
+            if (ScreenState == ScreenState.Active) _statementManager.Update(deltaTime);
 
             base.Update(deltaTime);
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 
-            spriteBatch.Draw(ContentChest.StageBackground, new Rectangle(0, 0, ScreenSettings.Width, ScreenSettings.Height), Color.White);
+            spriteBatch.Draw(ContentChest.StageBackground,
+                new Rectangle(0, 0, ScreenSettings.Width, ScreenSettings.Height), Color.White);
             spriteBatch.Draw(ContentChest.Stage,
                 new Rectangle(0, ScreenSettings.Height - ContentChest.Stage.Height / 2, 1280,
                     ContentChest.Stage.Height), Color.White);
@@ -105,7 +103,7 @@ namespace BrexitTime.Screens
                 new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2,
                     ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.UKPodium.Width * 2,
                     ContentChest.UKPodium.Height * 2), Color.White);
-            
+
             _audience.Draw(spriteBatch);
 
             if (debug)
