@@ -22,10 +22,10 @@
     ]
   },
   {
-    "Body": "I can promise you, that if you follow me, We will...",
+    "Body": "I can promise you, that if you follow me, We will get...",
     "Answers": [
       {
-        "Text": "More Aldis! More Caffeine Shampoo!",
+        "Text": "More Caffeine Shampoo!",
         "BiasModifier": 0.2
       },
       {
@@ -34,11 +34,11 @@
 
       },
       {
-        "Text": "Reduce the import emissions!",
+        "Text": "Less Emissions!",
         "BiasModifier": -0.1
       },
       {
-        "Text": "Build less Guns!",
+        "Text": "Less Guns!",
         "BiasModifier": 0.1
       }
     ]

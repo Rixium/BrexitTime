@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using BrexitTime.Constants;
 using BrexitTime.Enums;
 using BrexitTime.Games;
@@ -8,6 +9,7 @@ using BrexitTime.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using Random = System.Random;
 
 namespace BrexitTime.Screens
@@ -23,8 +25,10 @@ namespace BrexitTime.Screens
         private BrexitBar _brexitBar;
         private StatementManager _statementManager;
         private bool debug;
+        private float gameTime;
 
         private List<FloatyText> FloatyText = new List<FloatyText>();
+        private bool _ended;
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
@@ -59,7 +63,17 @@ namespace BrexitTime.Screens
             _brexitBar.SetRemain(_audience.Remainers);
 
             _audience.OnDecision += OnDecision;
+
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Play(ContentChest.MainSong);
+            gameTime = (float) ContentChest.MainSong.Duration.TotalSeconds;
             base.Initialise();
+        }
+
+        private void OnSongEnd()
+        {
+            _ended = true;
+            OnDecision(_audience.GetBias());
         }
 
         private void OnStatementSelect(Character c, Answer ans)
@@ -108,6 +122,8 @@ namespace BrexitTime.Screens
         public override void Update(float deltaTime)
         {
             _audience.Update(deltaTime);
+            gameTime -= deltaTime;
+            gameTime = MathHelper.Clamp(gameTime, 0, (float) ContentChest.MainSong.Duration.TotalSeconds);
 
             _brexitBar.SetBrexit(_audience.Brexiteers);
             _brexitBar.SetRemain(_audience.Remainers);
@@ -119,7 +135,11 @@ namespace BrexitTime.Screens
                     FloatyText.Remove(t);
             }
 
-            if (ScreenState == ScreenState.Active) _statementManager.Update(deltaTime);
+            if (ScreenState == ScreenState.Active && !_ended)
+            {
+                _statementManager.Update(deltaTime);
+                if (gameTime <= 8.5) OnSongEnd();
+            }
 
             base.Update(deltaTime);
         }
@@ -161,6 +181,7 @@ namespace BrexitTime.Screens
                     Color.White);
                 spriteBatch.DrawString(ContentChest.MainFont, $"LEAVE: {_audience.Brexiteers}", new Vector2(10, 70),
                     Color.White);
+                spriteBatch.DrawString(ContentChest.MainFont, gameTime.ToString(CultureInfo.InvariantCulture), ScreenSettings.ScreenCenter, Color.White);
             }
 
             foreach(var t in new List<FloatyText>(FloatyText))

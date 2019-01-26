@@ -59,6 +59,7 @@ namespace BrexitTime
 
         public Texture2D LeaveBar { get; set; }
         public Texture2D RemainBar { get; set; }
+        public Song MenuMusic { get; set; }
 
         public void Load()
         {
@@ -74,6 +75,7 @@ namespace BrexitTime
             QuestionFont = Load<SpriteFont>("Fonts/QuestionFont");
             GameBackground = Load<Texture2D>("Background/background");
             MainSong = Load<Song>("music/mainsong");
+            MenuMusic = Load<Song>("music/MenuSong");
             UKPodium = Load<Texture2D>("gameobjects/podium_uk");
             EUPodium = Load<Texture2D>("gameobjects/podium_eu");
             Logo = Load<Texture2D>("logo");

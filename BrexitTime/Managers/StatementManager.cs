@@ -100,6 +100,7 @@ namespace BrexitTime.Managers
             if (charTimer >= animateTime)
             {
                 currLength++;
+                
                 charTimer = 0;
                 _contentChest.Click.Play();
             }
@@ -117,6 +118,9 @@ namespace BrexitTime.Managers
             _activeAnswerTimer = 0;
             _contentChest.Answer.Play();
             _activeAnswers++;
+
+            GamePad.SetVibration(0, 1, 1);
+            GamePad.SetVibration(1, 1, 1);
         }
 
         private void NewStatement()

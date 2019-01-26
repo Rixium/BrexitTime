@@ -65,6 +65,8 @@ namespace BrexitTime.Screens
 
         private void ChangeButton(InputCommand obj)
         {
+            GamePad.SetVibration(0, 1, 1);
+            GamePad.SetVibration(1, 1, 1);
             switch (obj.Button)
             {
                 case Buttons.LeftThumbstickUp:
@@ -85,6 +87,8 @@ namespace BrexitTime.Screens
 
         private void ClickSelected(InputCommand obj)
         {
+            GamePad.SetVibration(0, 1, 1);
+            GamePad.SetVibration(1, 1, 1);
             _uiElements[_hoverButton].Click();
         }
 

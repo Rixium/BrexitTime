@@ -340,6 +340,12 @@
 /processorParam:Quality=Best
 /build:music/mainsong.mp3
 
+#begin music/MenuSong.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/MenuSong.mp3
+
 #begin pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -670,30 +676,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/remainBar.png
 
-#begin UI/remainBar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/remainBar.png
-
-#begin UI/Xbox_A.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Xbox_A.png
-
 #begin UI/Xbox_A.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -718,18 +700,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/Xbox_B.png
 
-#begin UI/Xbox_B.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Xbox_B.png
-
 #begin UI/Xbox_X.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -741,30 +711,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Xbox_X.png
-
-#begin UI/Xbox_X.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Xbox_X.png
-
-#begin UI/Xbox_Y.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Xbox_Y.png
 
 #begin UI/Xbox_Y.png
 /importer:TextureImporter

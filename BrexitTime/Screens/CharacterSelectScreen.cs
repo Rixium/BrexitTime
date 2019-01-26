@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace BrexitTime.Screens
 {
@@ -31,6 +32,8 @@ namespace BrexitTime.Screens
         public int selectedC2;
 
         private SoundEffectInstance soundEffect;
+        private bool _fadingOutMusic;
+        private bool _ended;
 
         public override void Initialise()
         {
@@ -126,13 +129,32 @@ namespace BrexitTime.Screens
 
         private void StartGame(InputCommand obj)
         {
+            if (_fadingOutMusic) return;
             soundEffect.Stop(true);
             AudioManager.OnStart();
-            ChangeScreen(new GameScreen(character1, character2, audience));
+            _fadingOutMusic = true;
+        }
+
+        private void FadeOutMusic(float deltaTime)
+        {
+            var currVol = MediaPlayer.Volume;
+            if (currVol <= 0) return;
+            currVol -= 50 *  deltaTime;
+
+            currVol = MathHelper.Clamp(currVol, 0, 1);
+
+            if (currVol <= 0 && !_ended)
+            {
+                _ended = true;
+                MediaPlayer.IsRepeating = false;
+                MediaPlayer.Stop();
+                ChangeScreen(new GameScreen(character1, character2, audience));
+            }
         }
 
         private void PlayerTwoLockIn(InputCommand obj)
         {
+            GamePad.SetVibration(1, 1, 1);
             c2LockedIn = true;
             ContentChest.SelectionClips[character2.CharacterData.Name].Play();
             AudioManager.OnSelect();
@@ -140,6 +162,7 @@ namespace BrexitTime.Screens
 
         private void PlayerOneLockIn(InputCommand obj)
         {
+            GamePad.SetVibration(0, 1, 1);
             if (c1LockedIn && c2LockedIn)
             {
                 StartGame(null);
@@ -267,6 +290,10 @@ namespace BrexitTime.Screens
         {
             pulseTimer += deltaTime * 3;
             audience.Update(deltaTime);
+
+            if(_fadingOutMusic)
+                FadeOutMusic(deltaTime);
+
             base.Update(deltaTime);
         }
 
@@ -302,8 +329,10 @@ namespace BrexitTime.Screens
             foreach (var b in _playerButtons)
                 b.Draw(spriteBatch);
 
-            var text = "CHOOSE YOUR CHARACTER";
+            var text = "Choose Your Brexit Battler";
             var size = ContentChest.TitleFont.MeasureString(text);
+            spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 22),
+                Color.Black * 0.5f);
             spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 20),
                 Color.White);
 

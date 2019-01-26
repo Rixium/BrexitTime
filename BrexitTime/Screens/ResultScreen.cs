@@ -25,7 +25,7 @@ namespace BrexitTime.Screens
 
         private void OnMainMenuPress(InputCommand obj)
         {
-            ChangeScreen(new MainMenuScreen());
+            ChangeScreen(new SplashScreen());
         }
 
         public override void Update(float deltaTime)

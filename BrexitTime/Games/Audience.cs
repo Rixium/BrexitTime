@@ -75,10 +75,7 @@ namespace BrexitTime.Games
                 Remainers--;
                 Brexiteers++;
             }
-
-
-            if(Brexiteers == 0 || Remainers == 0)
-                OnDecision?.Invoke(Brexiteers > Remainers ? Bias.Leave : Bias.Remain);
+            
         }
 
         private void UpdateAudience(Bias memberBias)
@@ -138,6 +135,12 @@ namespace BrexitTime.Games
         {
             foreach (var m in Members) m.UpdateBias(modifier);
         }
+
+        public Bias GetBias()
+        {
+            return Brexiteers > Remainers ? Bias.Leave : Bias.Remain;
+        }
+
     }
     
 }

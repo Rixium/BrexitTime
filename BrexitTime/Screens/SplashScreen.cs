@@ -1,4 +1,5 @@
-﻿using BrexitTime.Constants;
+﻿using System;
+using BrexitTime.Constants;
 using BrexitTime.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,8 +16,8 @@ namespace BrexitTime.Screens
         public override void Initialise()
         {
             MediaPlayer.IsRepeating = true;
-            MediaPlayer.Volume = 0.2f;
-            MediaPlayer.Play(ContentChest.MainSong);
+            MediaPlayer.Volume = 0.6f;
+            MediaPlayer.Play(ContentChest.MenuMusic, new TimeSpan(0, 0, 0, 5));
             base.Initialise();
         }
 
