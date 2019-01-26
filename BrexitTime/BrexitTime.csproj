@@ -57,6 +57,7 @@
     <Compile Include="Screens\Screen.cs" />
     <Compile Include="Screens\SplashScreen.cs" />
     <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\Logo.cs" />
     <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>

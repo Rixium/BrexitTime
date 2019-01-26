@@ -19,8 +19,16 @@ namespace BrexitTime.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
-            spriteBatch.Draw(ContentChest.GameBackground,
-                new Rectangle(0, 0, ScreenSettings.Width, ScreenSettings.Height), Color.White);
+            
+            spriteBatch.Draw(ContentChest.Stage, new Rectangle(0, ScreenSettings.Height - (ContentChest.Stage.Height * 6), 1280, ContentChest.Stage.Height * 10), Color.White);
+            spriteBatch.Draw(ContentChest.Shadow, new Rectangle(100, ScreenSettings.Height / 2 - 65, ContentChest.EUPodium.Width * 2, ContentChest.EUPodium.Height * 2), Color.Black * 0.8f);
+            spriteBatch.Draw(ContentChest.Shadow, new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2, ScreenSettings.Height / 2 - 65, ContentChest.UKPodium.Width * 2, ContentChest.UKPodium.Height * 2), Color.Black * 0.8f);
+            spriteBatch.Draw(ContentChest.EUPodium, new Rectangle(100, ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.EUPodium.Width * 2, ContentChest.EUPodium.Height * 2), Color.White);
+            spriteBatch.Draw(ContentChest.UKPodium, new Rectangle(ScreenSettings.Width - 100 - ContentChest.UKPodium.Width * 2, ScreenSettings.Height / 2 - ContentChest.EUPodium.Height / 2, ContentChest.UKPodium.Width * 2, ContentChest.UKPodium.Height * 2), Color.White);
+
+            var text = "CHOOSE YOUR CHARACTER";
+            var size = ContentChest.TitleFont.MeasureString(text);
+            spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 20), Color.Black);
             spriteBatch.End();
             base.Draw(spriteBatch);
         }
