@@ -48,24 +48,34 @@ namespace BrexitTime.Games
                     break;
             }
 
-
-            if (_random.Next(0, 1000) < 50)
-            {
-                var total = Brexiteers + Remainers;
-                var brexitOrRemain = _random.Next(0, total);
-
-                if (brexitOrRemain < Brexiteers)
-                {
-                    _contentChest.Leaves[_random.Next(0, _contentChest.Leaves.Count)].Play();
-                }
-                else _contentChest.Remains[_random.Next(0, _contentChest.Remains.Count)].Play();
-            }
         }
 
         public void Update(float deltaTime)
         {
             foreach (var m in Members)
                 m.Update(deltaTime);
+
+            
+            if (_random.Next(0, 1000) < 5)
+            {
+                var total = Brexiteers + Remainers;
+                var brexitOrRemain = _random.Next(0, total);
+
+                if (brexitOrRemain < Brexiteers)
+                {
+                    var sound = _contentChest.Leaves[_random.Next(0, _contentChest.Leaves.Count)].CreateInstance();
+                    sound.Volume = 0.3f;
+                    sound.Pan = 0;
+                    sound.Play();
+                }
+                else
+                {
+                    var sound = _contentChest.Remains[_random.Next(0, _contentChest.Remains.Count)].CreateInstance();
+                    sound.Volume = 0.3f;
+                    sound.Pan = 0;
+                    sound.Play();
+                }
+            }
         }
         public void Draw(SpriteBatch spriteBatch)
         {
