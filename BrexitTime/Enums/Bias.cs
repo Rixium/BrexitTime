@@ -3,6 +3,7 @@
     public enum Bias
     {
         Leave,
-        Remain
+        Remain,
+        Neutral
     }
 }

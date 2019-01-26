@@ -1,0 +1,25 @@
+﻿[
+  {
+    "Body": "I can promise, following negotiations, I will provide... ",
+    "Answers": [
+      {
+        "Text":"More Weapons",
+        "BiasModifier":"Leave"
+      },
+      {
+        "Text": "Less Movement Restrictions",
+        "BiasModifier":"Remain"
+      },
+      {
+        "Text": "Make me",
+        "BiasModifier":"Neutral"
+
+      },
+      {
+        "Text": "Make me",
+        "BiasModifier":"Neutral"
+      }
+    ]
+  }
+
+]

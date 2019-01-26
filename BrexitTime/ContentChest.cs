@@ -20,6 +20,7 @@ namespace BrexitTime
         }
 
         public List<CharacterData> CharacterData { get; set; }
+        public List<Statement> Statements { get; set; }
         public Song MainSong { get; set; }
         public Texture2D ButtonBackground { get; set; }
         public Texture2D ButtonBackground_Pressed { get; set; }
@@ -41,6 +42,7 @@ namespace BrexitTime
         public SoundEffect Select { get; set; }
         public SoundEffect Start { get; set; }
         public SoundEffect Audience { get; set; }
+        public SoundEffect Answer { get; set; }
 
         public Dictionary<ButtonType, Texture2D> GamepadButtons { get; set; } = new Dictionary<ButtonType, Texture2D>();
         public Dictionary<string, Texture2D> Characters { get; set; } = new Dictionary<string, Texture2D>();
@@ -69,6 +71,7 @@ namespace BrexitTime
             StageBackground = Load<Texture2D>("Background/stage_background");
             Click = Load<SoundEffect>("SoundEffects/click");
             Select = Load<SoundEffect>("SoundEffects/select");
+            Answer = Load<SoundEffect>("SoundEffects/answer");
             Start = Load<SoundEffect>("SoundEffects/start");
             Audience = Load<SoundEffect>("SoundEffects/audience");
             AudiencePeople.Add(Load<Texture2D>("Characters/audience/audience_1"));
@@ -94,12 +97,19 @@ namespace BrexitTime
             Portraits.Add("Boris", Load<Texture2D>("Portraits/Boris_Portrait"));
             Portraits.Add("Theresa", Load<Texture2D>("Portraits/Theresa_Portrait"));
             LoadCharacterData();
+            LoadStatements();
         }
 
         private void LoadCharacterData()
         {
             var text = File.ReadAllText("Content/Data/Characters.json");
             CharacterData = JsonConvert.DeserializeObject<List<CharacterData>>(text);
+        }
+
+        private void LoadStatements()
+        {
+            var text = File.ReadAllText("Content/Data/Questions.json");
+            Statements = JsonConvert.DeserializeObject<List<Statement>>(text);
         }
 
         // Quick function to make loading a little more straight forward.

@@ -61,18 +61,6 @@
 /processorParam:TextureFormat=Color
 /build:Characters/Audience/audience_1.png
 
-#begin Characters/Audience/audience_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Characters/Audience/audience_1.png
-
 #begin Characters/Audience/audience_2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -369,11 +357,29 @@
 /processorParam:TextureFormat=Color
 /build:Portraits/Theresa_Portrait.png
 
+#begin SoundEffects/answer.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/answer.wav
+
 #begin SoundEffects/audience.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/audience.wav
+
+#begin SoundEffects/audience.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/audience.wav
+
+#begin SoundEffects/click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/click.wav
 
 #begin SoundEffects/click.wav
 /importer:WavImporter
@@ -387,6 +393,18 @@
 /processorParam:Quality=Best
 /build:SoundEffects/select.wav
 
+#begin SoundEffects/select.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/select.wav
+
+#begin SoundEffects/Selections/boris.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Selections/boris.wav
+
 #begin SoundEffects/Selections/boris.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -399,11 +417,29 @@
 /processorParam:Quality=Best
 /build:SoundEffects/Selections/jeremy.wav
 
+#begin SoundEffects/Selections/jeremy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Selections/jeremy.wav
+
 #begin SoundEffects/Selections/theresa.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:SoundEffects/Selections/theresa.wav
+
+#begin SoundEffects/Selections/theresa.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/Selections/theresa.wav
+
+#begin SoundEffects/start.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SoundEffects/start.wav
 
 #begin SoundEffects/start.wav
 /importer:WavImporter

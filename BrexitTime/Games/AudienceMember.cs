@@ -15,6 +15,7 @@ namespace BrexitTime.Games
         private float wiggleTimer = 0;
         private Random random;
         public Bias Bias;
+        private float _bias;
 
         public AudienceMember(Texture2D texture, Vector2 pos, Color c, Random r, Bias memberBias)
         {
@@ -24,6 +25,7 @@ namespace BrexitTime.Games
             _color = c;
             _startPosition = _pos;
             Bias = memberBias;
+            _bias = (float) memberBias;
         }
 
         public void Update(float deltaTime)

@@ -17,15 +17,17 @@ namespace BrexitTime.Games
 
         public Audience(ContentChest contentChest)
         {
-            for (var i = 0; i < ScreenSettings.Width; i++)
+            for (var i = 0; i < ScreenSettings.Width; i += 20)
             {
-                var spawnMember = _random.Next(0, 100) <= 2;
+                var spawnMember = _random.Next(0, 100) <= 80;
                 if (spawnMember == false) continue;
 
                 var selection = contentChest.AudiencePeople[_random.Next(0, contentChest.AudiencePeople.Count)];
                 var c = _random.Next(0, 40);
-                var bias = _random.Next(0, 2);
-                
+                var bias = _random.Next(0, 100);
+
+                bias = bias < 50 ? 0 : 1;
+
                 var memberBias = (Bias) bias;
                 UpdateAudience(memberBias);
                 Members.Add(new AudienceMember(selection, new Vector2(i, ScreenSettings.Height - selection.Height + _random.Next(0, 30)), new Color(c, c, c), _random, memberBias));

@@ -1,7 +1,11 @@
-﻿using BrexitTime.Constants;
+﻿using System;
+using BrexitTime.Constants;
+using BrexitTime.Enums;
 using BrexitTime.Games;
+using BrexitTime.Managers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace BrexitTime.Screens
 {
@@ -10,25 +14,44 @@ namespace BrexitTime.Screens
         private readonly Character _playerOne;
         private readonly Character _playerTwo;
         private readonly Audience _audience;
+        private readonly Random _random;
+        private bool debug;
+
+        private Statement _activeStatement;
+        private StatementManager _statementManager;
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
             _playerOne = playerOne;
             _playerTwo = playerTwo;
             _audience = audience;
+            _random = new Random();
         }
 
         public override void Initialise()
         {
+            InputManager.RegisterOnKeyPress(Keys.F1, ToggleDebug);
+            _statementManager = new StatementManager(ContentChest);
             base.Initialise();
+        }
+
+        private void ToggleDebug(Keys obj)
+        {
+            debug = !debug;
         }
 
         public override void Update(float deltaTime)
         {
             _audience.Update(deltaTime);
+
+            if (ScreenState == ScreenState.Active)
+            {
+                _statementManager.Update(deltaTime);
+            }
+
             base.Update(deltaTime);
         }
-
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
@@ -58,9 +81,17 @@ namespace BrexitTime.Screens
             
             _audience.Draw(spriteBatch);
 
-            spriteBatch.DrawString(ContentChest.MainFont, "AUDIENCE BIAS", new Vector2(10, 10), Color.White);
-            spriteBatch.DrawString(ContentChest.MainFont, $"REMAIN: {_audience.Remainers}", new Vector2(10, 40), Color.White);
-            spriteBatch.DrawString(ContentChest.MainFont, $"LEAVE: {_audience.Brexiteers}", new Vector2(10, 70), Color.White);
+            if (debug)
+            {
+                spriteBatch.DrawString(ContentChest.MainFont, "AUDIENCE BIAS", new Vector2(10, 10), Color.White);
+                spriteBatch.DrawString(ContentChest.MainFont, $"REMAIN: {_audience.Remainers}", new Vector2(10, 40),
+                    Color.White);
+                spriteBatch.DrawString(ContentChest.MainFont, $"LEAVE: {_audience.Brexiteers}", new Vector2(10, 70),
+                    Color.White);
+            }
+
+            _statementManager.Draw(spriteBatch);
+
             spriteBatch.End();
             base.Draw(spriteBatch);
         }
