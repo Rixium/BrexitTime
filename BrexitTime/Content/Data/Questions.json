@@ -4,7 +4,7 @@
     "Answers": [
       {
         "Text": "Better Defence!",
-        "BiasModifier": -0.2
+        "BiasModifier": -0.02
       },
       {
         "Text": "More Workers!",
@@ -17,7 +17,7 @@
       },
       {
         "Text": "Trade Opportunities!",
-        "BiasModifier": 0.2
+        "BiasModifier": 0.02
       }
     ]
   },
@@ -26,7 +26,7 @@
     "Answers": [
       {
         "Text": "More Caffeine Shampoo!",
-        "BiasModifier": 0.2
+        "BiasModifier": 0.02
       },
       {
         "Text": "Less Emissions!",
@@ -38,7 +38,7 @@
       },
       {
         "Text": "More Tommy Robinson!",
-        "BiasModifier": -0.2
+        "BiasModifier": -0.02
 
       }
     ]
@@ -52,12 +52,12 @@
       },
       {
         "Text": "Boris Island!",
-        "BiasModifier": -0.2
+        "BiasModifier": -0.02
 
       },
       {
         "Text": "Big Bridges!",
-        "BiasModifier": 0.2
+        "BiasModifier": 0.02
       },
       {
         "Text": "Education!",
@@ -70,20 +70,20 @@
     "Answers": [
       {
         "Text": "A BIGGER Bus!",
-        "BiasModifier": -0.5
+        "BiasModifier": -0.06
       },
       {
         "Text": "More Farms!",
-        "BiasModifier": -0.2
+        "BiasModifier": -0.02
 
       },
       {
         "Text": "More Housing!",
-        "BiasModifier": 0.2
+        "BiasModifier": 0.02
       },
       {
         "Text": "More Aldis!",
-        "BiasModifier": 0.5
+        "BiasModifier": 0.06
       }
     ]
   },
@@ -96,7 +96,7 @@
       },
       {
         "Text": "JEZZA!",
-        "BiasModifier": 0.5
+        "BiasModifier": 0.06
       },
       {
         "Text": "MYSELF!",
@@ -105,7 +105,7 @@
       },
       {
         "Text": "Tommy Robinson!",
-        "BiasModifier": -0.5
+        "BiasModifier": -0.06
       }
     ]
   },
@@ -114,22 +114,109 @@
     "Answers": [
       {
         "Text": "Lots Of Bloody Lidls!",
-        "BiasModifier": 0.2
+        "BiasModifier": 0.02
 
       },
       {
         "Text": "Baked Bloody Beans!",
-        "BiasModifier": -0.2
+        "BiasModifier": -0.02
       },
       {
         "Text": "Tasty Bloody Tea!",
-        "BiasModifier": -0.5
+        "BiasModifier": -0.06
       },
       {
         "Text": "More Bloody Immigrants!",
-        "BiasModifier": 0.5
+        "BiasModifier": 0.06
+      }
+    ]
+  },
+  {
+    "Body": "I offer great opportunities, for you, your family and...",
+    "Answers": [
+      {
+        "Text": "Brussels!",
+        "BiasModifier": 0.02
+      },
+      {
+        "Text": "The Rich!",
+        "BiasModifier": -0.02
+
+      },
+      {
+        "Text": "The Unemployed!",
+        "BiasModifier": -0.06
+      },
+      {
+        "Text": "The Immigrants!",
+        "BiasModifier": 0.06
+      }
+    ]
+  },
+  {
+    "Body": "Police, and Hospitals will all benefit from...",
+    "Answers": [
+      {
+        "Text": "A Stronger Border!",
+        "BiasModifier": -0.02
+      },
+      {
+        "Text": "A Smaller Population!",
+        "BiasModifier": -0.06
+
+      },
+      {
+        "Text": "Better Educated Staff!",
+        "BiasModifier": 0.06
+      },
+      {
+        "Text": "More Staff!",
+        "BiasModifier": 0.02
+      }
+    ]
+  },
+  {
+    "Body": "It is pure...",
+    "Answers": [
+      {
+        "Text": "Truth!",
+        "BiasModifier": -0.02
+      },
+      {
+        "Text": "Democracy!",
+        "BiasModifier": -0.06
+
+      },
+      {
+        "Text": "Lies!",
+        "BiasModifier": 0.06
+      },
+      {
+        "Text": "Neglect!",
+        "BiasModifier": 0.02
+      }
+    ]
+  },
+  {
+    "Body": "We will build a stronger, more powerful cabinet thanks to...",
+    "Answers": [
+      {
+        "Text": "Democracy!",
+        "BiasModifier": -0.02
+      },
+      {
+        "Text": "Tommy Robinson!",
+        "BiasModifier": -0.06
+
+      },
+      {
+        "Text": "IKEA!",
+        "BiasModifier": 0.06
+      },
+      {
+        "Text": "Brussels!",
+        "BiasModifier": 0.02
       }
     ]
   }
-
 ]

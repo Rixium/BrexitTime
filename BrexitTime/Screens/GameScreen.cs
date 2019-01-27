@@ -101,12 +101,11 @@ namespace BrexitTime.Screens
 
         private float CalculateBias(Character p, float bias)
         {
-            if (bias < 0 && p == _playerOne)
-                return bias / 2.0f;
-            if (bias > 0 && p == _playerTwo)
-                return bias / 2.0f;
+            if (bias < 0 && p == _playerOne
+                || bias > 0 && p == _playerTwo)
+                return bias * 2.0f;
 
-            return (float)(bias * Constants.Random.Rand.NextDouble() + 0.2f);
+            return (float)(bias * (Constants.Random.Rand.NextDouble() + 0.6f));
         }
 
         private void ButtonDown(InputCommand obj)

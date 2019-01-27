@@ -65,8 +65,7 @@ namespace BrexitTime
             var deltaTime =
                 gameTime.ElapsedGameTime.Milliseconds / 1000.0f; // Get milliseconds passed since last frame.
             _screenManager.Update(deltaTime); // Update all the active screens.
-
-            Console.WriteLine(GamePad.GetCapabilities(1).DisplayName);
+            
             base.Update(gameTime);
         }
 

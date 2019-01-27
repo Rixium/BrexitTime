@@ -146,16 +146,20 @@ namespace BrexitTime.Managers
             {
                 var answer = _activeStatement.Answers[i];
                 var answerSize = _contentChest.MainFont.MeasureString(answer.Text);
-                var b = _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]][GamePad.GetCapabilities(0).DisplayName];
+                var b = _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]].ContainsKey(GamePad.GetCapabilities(0).DisplayName) ?
+                    _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]][GamePad.GetCapabilities(0).DisplayName] :
+                    _contentChest.GamepadButtons[_activeStatement.P1AnswerButtons[i]]["XInput Controller"];
                 var b2 = b;
 
                 if (GamePad.GetCapabilities(1).IsConnected)
                     b2 = _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]][
                         GamePad.GetCapabilities(1).DisplayName];
+                else b2 = _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]].ContainsKey(GamePad.GetCapabilities(0).DisplayName) ?
+                    _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]][GamePad.GetCapabilities(0).DisplayName] :
+                    _contentChest.GamepadButtons[_activeStatement.P2AnswerButtons[i]]["XInput Controller"];
 
                 var textPos = new Vector2(ScreenSettings.ScreenCenter.X - answerSize.X / 2,
                     ScreenSettings.ScreenCenter.Y - 4 * (30 + answerSize.Y) + i * (answerSize.Y + 30));
-
                 
                 if (!answer.Used)
                 {

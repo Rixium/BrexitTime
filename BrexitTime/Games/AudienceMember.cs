@@ -17,8 +17,9 @@ namespace BrexitTime.Games
         public Bias Bias;
         public Action<Bias> OnBiasChanged;
         private float wiggleTimer;
+        private bool render;
 
-        public AudienceMember(Texture2D texture, Vector2 pos, Color c, Random r, Bias memberBias)
+        public AudienceMember(Texture2D texture, Vector2 pos, Color c, Random r, Bias memberBias, bool b = true)
         {
             _texture = texture;
             _pos = pos;
@@ -26,7 +27,7 @@ namespace BrexitTime.Games
             _color = c;
             _startPosition = _pos;
             Bias = memberBias;
-
+            render = b;
             if (Bias == Bias.Remain)
             {
                 _bias = (float) memberBias;
@@ -63,6 +64,7 @@ namespace BrexitTime.Games
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (!render) return;
             spriteBatch.Draw(_texture, _pos, _color);
         }
 
@@ -70,7 +72,7 @@ namespace BrexitTime.Games
         {
             _bias += modifier;
 
-            _bias = MathHelper.Clamp(_bias, 0, 1);
+            _bias = MathHelper.Clamp(_bias, 0.3f, 0.7f);
 
             var newBias = (Bias) Math.Round(_bias);
 

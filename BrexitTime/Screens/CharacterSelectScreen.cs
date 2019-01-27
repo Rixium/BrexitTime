@@ -355,7 +355,9 @@ namespace BrexitTime.Screens
         private void DrawButtons(SpriteBatch spriteBatch)
         {
             var showOne = false;
-            var b1 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(0).DisplayName];
+            var b1 = ContentChest.GamepadButtons[ButtonType.A].ContainsKey(GamePad.GetCapabilities(0).DisplayName) ?
+                ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(0).DisplayName] :
+                ContentChest.GamepadButtons[ButtonType.A]["XInput Controller"];
             var b2 = b1;
             if(GamePad.GetCapabilities(1).IsConnected)
                 b2 = ContentChest.GamepadButtons[ButtonType.A][GamePad.GetCapabilities(1).DisplayName];

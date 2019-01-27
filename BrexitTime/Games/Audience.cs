@@ -24,7 +24,7 @@ namespace BrexitTime.Games
         public Audience(ContentChest contentChest)
         {
             _contentChest = contentChest;
-            for (var i = 0; i < ScreenSettings.Width; i += 20)
+            for (var i = 0; i < ScreenSettings.Width / 2; i += 20)
             {
                 var spawnMember = _random.Next(0, 100) <= 80;
                 if (spawnMember == false) continue;
@@ -33,7 +33,7 @@ namespace BrexitTime.Games
                 var c = _random.Next(0, 40);
                 var bias = _random.Next(0, 100);
 
-                bias = bias < 50 ? 0 : 1;
+                bias = 0;
 
                 var memberBias = (Bias) bias;
                 UpdateAudience(memberBias);
@@ -42,24 +42,47 @@ namespace BrexitTime.Games
                     _random, memberBias);
                 mem.OnBiasChanged += OnBiasChanged;
                 Members.Add(mem);
+            }
 
+            for (var i = ScreenSettings.Width / 2; i < ScreenSettings.Width; i += 20)
+            {
+                var spawnMember = _random.Next(0, 100) <= 80;
+                if (spawnMember == false) continue;
+
+                var selection = contentChest.AudiencePeople[_random.Next(0, contentChest.AudiencePeople.Count)];
+                var c = _random.Next(0, 40);
+                var bias = _random.Next(0, 100);
+
+                bias = 1;
+
+                var memberBias = (Bias)bias;
+                UpdateAudience(memberBias);
+                var mem = new AudienceMember(selection,
+                    new Vector2(i, ScreenSettings.Height - selection.Height + _random.Next(0, 30)), new Color(c, c, c),
+                    _random, memberBias);
+                mem.OnBiasChanged += OnBiasChanged;
+                Members.Add(mem);
+            }
+
+            for (var i = 0; i < 500; i++)
+            {
+                var selection = contentChest.AudiencePeople[_random.Next(0, contentChest.AudiencePeople.Count)];
+                var c = _random.Next(0, 40);
+                var bias = _random.Next(0, 100);
+
+                bias = i < 250 ? 0 : 1;
+
+                var memberBias = (Bias)bias;
+                UpdateAudience(memberBias);
+                var mem = new AudienceMember(selection,
+                    Vector2.Zero, new Color(c, c, c),
+                    _random, memberBias, false);
+                mem.OnBiasChanged += OnBiasChanged;
+                Members.Add(mem);
             }
             
-            CalculateRemainBias();
-
         }
-
-        private void CalculateRemainBias()
-        {
-            foreach (var m in Members)
-            {
-                if (m.RealBias <= 0.5)
-                {
-                    RemainBias += m.RealBias;
-                } else LeaveBias += 1 - m.RealBias;
-            }
-        }
-
+        
         public int Brexiteers { get; private set; }
         public int Remainers { get; private set; }
 
@@ -94,7 +117,7 @@ namespace BrexitTime.Games
 
             if (Rowdiness < Brexiteers + Remainers) return;
 
-            Rowdiness *= 2;
+            Rowdiness *= 30;
         }
 
         public void Update(float deltaTime)
@@ -103,7 +126,7 @@ namespace BrexitTime.Games
                 m.Update(deltaTime);
 
 
-            if (_random.Next(0, 1000) < Rowdiness)
+            if (_random.Next(0, (Brexiteers + Remainers) * 10) < Rowdiness)
             {
                 var total = Brexiteers + Remainers;
                 var brexitOrRemain = _random.Next(0, total);
