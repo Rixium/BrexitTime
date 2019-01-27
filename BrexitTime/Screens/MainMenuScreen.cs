@@ -31,22 +31,37 @@ namespace BrexitTime.Screens
             // Anything that requires use of the content chest should be in here.
             var position =
                 new Vector2(ScreenSettings.ScreenCenter.X,
-                    ContentChest.Logo.Height + Padding * 2); // Button position center of screen.
+                    ContentChest.Logo.Height); // Button position center of screen.
             var startButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed,
                 ContentChest.MainFont, "Start", position, 2,
                 Alignment.CENTER);
+            var howToPlayButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed,
+                ContentChest.MainFont, "How To Play",
+                new Vector2(position.X, startButton.Bottom.Y + Padding), 2,
+                Alignment.CENTER);
+            var creditsButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed,
+                ContentChest.MainFont, "Credits",
+                new Vector2(position.X, howToPlayButton.Bottom.Y + Padding), 2,
+                Alignment.CENTER);
             var quitButton = new Button(ContentChest.ButtonBackground, ContentChest.ButtonBackground_Pressed,
                 ContentChest.MainFont, "Exit",
-                new Vector2(position.X, startButton.Bottom.Y + Padding), 2,
+                new Vector2(position.X, creditsButton.Bottom.Y + Padding), 2,
                 Alignment.CENTER);
 
             _uiElements.Add(startButton);
+            _uiElements.Add(howToPlayButton);
+            _uiElements.Add(creditsButton);
             _uiElements.Add(quitButton);
 
             startButton.OnElementClick += AudioManager.OnButtonClick;
             startButton.OnElementClick += OnStartClicked;
             quitButton.OnElementClick += OnQuitClicked;
             quitButton.OnElementClick += AudioManager.OnButtonClick;
+
+            howToPlayButton.OnElementClick += AudioManager.OnButtonClick;
+            howToPlayButton.OnElementClick += OnHowToPlayClicked;
+            creditsButton.OnElementClick += OnCreditsClick;
+            creditsButton.OnElementClick += AudioManager.OnButtonClick;
 
             var pad1A = new InputCommand(0, Buttons.A);
             var pad1Down = new InputCommand(0, Buttons.LeftThumbstickDown);
@@ -61,6 +76,16 @@ namespace BrexitTime.Screens
             var textbounds = ContentChest.MainFont.MeasureString(_creditsText);
             _creditsPosition = new Vector2(ScreenSettings.Width / 2 - textbounds.X / 2,
                 ScreenSettings.Height - textbounds.Y - Padding);
+        }
+
+        private void OnCreditsClick(UIElement obj)
+        {
+            ChangeScreen(new CreditsScreen());   
+        }
+
+        private void OnHowToPlayClicked(UIElement obj)
+        {
+            ChangeScreen(new HowToPlayScreen());
         }
 
         private void ChangeButton(InputCommand obj)

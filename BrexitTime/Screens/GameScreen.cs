@@ -23,12 +23,12 @@ namespace BrexitTime.Screens
 
         private Statement _activeStatement;
         private BrexitBar _brexitBar;
+        private bool _ended;
         private StatementManager _statementManager;
         private bool debug;
-        private float gameTime;
 
-        private List<FloatyText> FloatyText = new List<FloatyText>();
-        private bool _ended;
+        private readonly List<FloatyText> FloatyText = new List<FloatyText>();
+        private float gameTime;
 
         public GameScreen(Character playerOne, Character playerTwo, Audience audience)
         {
@@ -101,12 +101,12 @@ namespace BrexitTime.Screens
 
         private float CalculateBias(Character p, float bias)
         {
-            if (bias < 0 && p.CharacterData.Bias == Bias.Remain)
+            if (bias < 0 && p == _playerOne)
                 return bias / 2.0f;
-            if (bias > 0 && p.CharacterData.Bias == Bias.Leave)
+            if (bias > 0 && p == _playerTwo)
                 return bias / 2.0f;
 
-            return bias;
+            return (float)(bias * Constants.Random.Rand.NextDouble() + 0.2f);
         }
 
         private void ButtonDown(InputCommand obj)
@@ -176,17 +176,14 @@ namespace BrexitTime.Screens
 
             _audience.Draw(spriteBatch);
 
-            if (debug)
-            {
-                spriteBatch.DrawString(ContentChest.MainFont, "AUDIENCE BIAS", new Vector2(10, 10), Color.White);
-                spriteBatch.DrawString(ContentChest.MainFont, $"REMAIN: {_audience.Remainers}", new Vector2(10, 40),
-                    Color.White);
-                spriteBatch.DrawString(ContentChest.MainFont, $"LEAVE: {_audience.Brexiteers}", new Vector2(10, 70),
-                    Color.White);
-                spriteBatch.DrawString(ContentChest.MainFont, gameTime.ToString(CultureInfo.InvariantCulture), ScreenSettings.ScreenCenter, Color.White);
-            }
+            var text =
+                $"Time Until Vote: {MathHelper.Clamp((float) Math.Floor(gameTime - 7), 0, gameTime + 1).ToString(CultureInfo.InvariantCulture)}";
+            var textSize = ContentChest.MainFont.MeasureString(text);
+            var timeToVotePos = new Vector2(ScreenSettings.Width / 2 - textSize.X / 2,
+                ScreenSettings.Height - _brexitBar.Border.Height - 10 - textSize.Y);
+            spriteBatch.DrawString(ContentChest.MainFont, text, timeToVotePos, Color.White);
 
-            foreach(var t in new List<FloatyText>(FloatyText))
+            foreach (var t in new List<FloatyText>(FloatyText))
                 t.Draw(spriteBatch);
 
             _statementManager.Draw(spriteBatch);

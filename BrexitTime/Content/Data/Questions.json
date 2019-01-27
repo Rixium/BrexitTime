@@ -3,20 +3,20 @@
     "Body": "I can promise, following negotiations, I will provide...",
     "Answers": [
       {
-        "Text": "Better Defence Against the Infidels",
+        "Text": "Better Defence!",
         "BiasModifier": -0.2
       },
       {
-        "Text": "More Workers for our businesses!",
+        "Text": "More Workers!",
         "BiasModifier": 0.1
 
       },
       {
-        "Text": "Less Opportunity For Travel",
+        "Text": "Less Travel!",
         "BiasModifier": -0.1
       },
       {
-        "Text": "Trade Opportunities with our Friends",
+        "Text": "Trade Opportunities!",
         "BiasModifier": 0.2
       }
     ]
@@ -29,17 +29,105 @@
         "BiasModifier": 0.2
       },
       {
-        "Text": "Tommy Robinson!",
-        "BiasModifier": -0.2
-
-      },
-      {
         "Text": "Less Emissions!",
         "BiasModifier": -0.1
       },
       {
         "Text": "Less Guns!",
         "BiasModifier": 0.1
+      },
+      {
+        "Text": "More Tommy Robinson!",
+        "BiasModifier": -0.2
+
+      }
+    ]
+  },
+  {
+    "Body": "If you side with me, I can promise that my area of focus will be...",
+    "Answers": [
+      {
+        "Text": "The NHS!",
+        "BiasModifier": 0.1
+      },
+      {
+        "Text": "Boris Island!",
+        "BiasModifier": -0.2
+
+      },
+      {
+        "Text": "Big Bridges!",
+        "BiasModifier": 0.2
+      },
+      {
+        "Text": "Education!",
+        "BiasModifier": -0.1
+      }
+    ]
+  },
+  {
+    "Body": "With the EXTRA money we have as a result, we will build...",
+    "Answers": [
+      {
+        "Text": "A BIGGER Bus!",
+        "BiasModifier": -0.5
+      },
+      {
+        "Text": "More Farms!",
+        "BiasModifier": -0.2
+
+      },
+      {
+        "Text": "More Housing!",
+        "BiasModifier": 0.2
+      },
+      {
+        "Text": "More Aldis!",
+        "BiasModifier": 0.5
+      }
+    ]
+  },
+  {
+    "Body": "On my victory, for next prime minister, I'll strongly support...",
+    "Answers": [
+      {
+        "Text": "The People!",
+        "BiasModifier": 0
+      },
+      {
+        "Text": "JEZZA!",
+        "BiasModifier": 0.5
+      },
+      {
+        "Text": "MYSELF!",
+        "BiasModifier": 0
+
+      },
+      {
+        "Text": "Tommy Robinson!",
+        "BiasModifier": -0.5
+      }
+    ]
+  },
+  {
+    "Body": "We will strive to provider our communities with...",
+    "Answers": [
+      {
+        "Text": "Lots Of Bloody Lidls!",
+        "BiasModifier": 0.2
+
+      },
+      {
+        "Text": "Baked Bloody Beans!",
+        "BiasModifier": -0.2
+      },
+      {
+        "Text": "Tasty Bloody Tea!",
+        "BiasModifier": -0.5
+      },
+      {
+        "Text": "More Bloody Immigrants!",
+        "BiasModifier": 0.5
       }
     ]
   }

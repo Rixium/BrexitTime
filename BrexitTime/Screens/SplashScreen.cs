@@ -3,6 +3,7 @@ using BrexitTime.Constants;
 using BrexitTime.Enums;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace BrexitTime.Screens
@@ -28,7 +29,11 @@ namespace BrexitTime.Screens
                 _time += deltaTime;
 
                 if (_time >= ShowTime)
-                    ChangeScreen(new MainMenuScreen());
+                {
+                    if(GamePad.GetState(0).IsConnected && GamePad.GetState(1).IsConnected)
+                        ChangeScreen(new MainMenuScreen());
+                    else ChangeScreen(new InsertControllersScreen());
+                }
             }
 
             base.Update(deltaTime);

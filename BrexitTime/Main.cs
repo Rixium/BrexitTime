@@ -1,6 +1,5 @@
 ﻿using System;
 using BrexitTime.Constants;
-using BrexitTime.Enums;
 using BrexitTime.Managers;
 using BrexitTime.Screens;
 using Microsoft.Xna.Framework;
@@ -23,7 +22,7 @@ namespace BrexitTime
                 PreferredBackBufferWidth = 1280,
                 PreferredBackBufferHeight = 720
             };
-            
+
             Content.RootDirectory = "Content";
             _contentChest =
                 new ContentChest(
@@ -41,7 +40,7 @@ namespace BrexitTime
 
         protected override void Initialize()
         {
-            Window.Title = "Ye Olde' Country We Call Home";
+            Window.Title = "The Brexit Simulator";
             _screenManager = new ScreenManager(this, _contentChest); // Hold the state of the screens.
             ScreenSettings.Initialise(Graphics); // We can store some constants here that we can use throughout.
             Graphics.ApplyChanges();

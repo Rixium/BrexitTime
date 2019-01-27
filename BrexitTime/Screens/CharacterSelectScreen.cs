@@ -313,6 +313,24 @@ namespace BrexitTime.Screens
                     ScreenSettings.Height / 2 - 65, ContentChest.UKPodium.Width * 2, ContentChest.UKPodium.Height * 2),
                 Color.Black * 0.8f);
 
+
+            var titleSize = ContentChest.TitleFont.MeasureString("Remainers");
+
+            spriteBatch.Draw(ContentChest.Pixel, new Rectangle(0, 0, ScreenSettings.Width, (int)(20 + titleSize.Y + 20)), Color.Black * 0.3f);
+
+            spriteBatch.DrawString(ContentChest.TitleFont, "Remainers",
+                new Vector2(ScreenSettings.Width / 4 - titleSize.X / 2 - ContentChest.PortraitBackground.Width / 2, 22), Color.Black * 0.5f);
+
+            spriteBatch.DrawString(ContentChest.TitleFont, "Remainers",
+                new Vector2(ScreenSettings.Width / 4 - titleSize.X / 2 - ContentChest.PortraitBackground.Width / 2, 20), Color.White);
+
+            titleSize = ContentChest.TitleFont.MeasureString("Brexiteers");
+            spriteBatch.DrawString(ContentChest.TitleFont, "Brexiteers",
+                new Vector2(ScreenSettings.Width / 2 + ScreenSettings.Width / 4 - titleSize.X / 2 + ContentChest.PortraitBackground.Width / 2, 22), Color.Black * 0.5f);
+
+            spriteBatch.DrawString(ContentChest.TitleFont, "Brexiteers",
+                new Vector2(ScreenSettings.Width / 2 + ScreenSettings.Width / 4 - titleSize.X / 2 + ContentChest.PortraitBackground.Width / 2, 20), Color.White);
+
             character1.Draw(spriteBatch, true);
             character2.Draw(spriteBatch, true);
 
@@ -328,13 +346,6 @@ namespace BrexitTime.Screens
 
             foreach (var b in _playerButtons)
                 b.Draw(spriteBatch);
-
-            var text = "Choose Your Brexit Battler";
-            var size = ContentChest.TitleFont.MeasureString(text);
-            spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 22),
-                Color.Black * 0.5f);
-            spriteBatch.DrawString(ContentChest.TitleFont, text, new Vector2(ScreenSettings.Width / 2 - size.X / 2, 20),
-                Color.White);
 
             DrawButtons(spriteBatch);
             spriteBatch.End();
